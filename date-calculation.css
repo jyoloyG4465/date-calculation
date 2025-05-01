@@ -14,7 +14,7 @@ body {
   border: 1px solid #ddd;
   border-radius: 10px;
   box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-  max-width: 500px;
+  max-width: 700px;
   width: 100%;
   box-sizing: border-box;
 }
@@ -50,7 +50,7 @@ label, input, button {
 
 .fieldset-with-menu fieldset {
   margin: 0;
-  max-width: 300px;
+  max-width: 500px;
   padding: 10px;
   flex-grow: 1;          /* 空間を多めに使う */
   margin-left: 30px;  /* ボタンが改行しないように */
