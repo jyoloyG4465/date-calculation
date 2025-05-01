@@ -40,13 +40,23 @@ function setSelect(id, min, max) {
 // メニューを開く
 function toggleActionMenu(menuId) {
   const menu = document.getElementById(menuId);
-  menu.classList.toggle("hidden");
+  const fieldsetContainer = document.querySelector(`.field-${menuId}`);
+
+  if (menu.classList.contains('hidden')) {
+    menu.classList.remove('hidden');
+    fieldsetContainer.style.marginBottom = '70px';
+  } else {
+    menu.classList.add('hidden');
+    fieldsetContainer.style.marginBottom = ''; // 元に戻す
+  }
 }
 
 // メニューを閉じる
 function closeMenu(menuId) {
   const menu = document.getElementById(menuId);
+  const fieldsetContainer = document.querySelector(`.field-${menuId}`);
   menu.classList.add("hidden");
+  fieldsetContainer.style.marginBottom = ''; // 元に戻す
 }
 
 // 日数を計算する
@@ -60,7 +70,9 @@ function calculateDays() {
   const ed = document.getElementById('endDay').value;
 
   if (sy == '' || ey == '') {
-    document.getElementById('result').textContent = "年が空欄になっています。";
+    document.getElementById('result1').textContent = "年が空欄になっています。";
+    document.getElementById('result2').textContent = "";
+    document.getElementById('result3').textContent = "";
     return;
   }
 
@@ -68,7 +80,9 @@ function calculateDays() {
   const end = new Date(`${ey}-${em}-${ed}`);
 
   if (isNaN(start.getTime()) || isNaN(end.getTime())) {
-    document.getElementById('result').textContent = "日付の形式が正しくありません。";
+    document.getElementById('result1').textContent = "日付の形式が正しくありません。";
+    document.getElementById('result2').textContent = "";
+    document.getElementById('result3').textContent = "";
     return;
   }
 

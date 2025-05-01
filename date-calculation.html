@@ -10,7 +10,7 @@
     <h1>日数計算ツール</h1>
 
     <form id="dateForm">
-      <div class="a">
+      <div class="field-menu1">
         <div class="fieldset-with-menu">
           <fieldset>
             <legend>開始日</legend>
@@ -32,8 +32,8 @@
           </div>
         </div>
       </div>
-      <div class="a">
-        <div class="fieldset-with-menu">
+      <div class="field-menu2">
+        <div class="fieldset-with-menu field-menu2">
           <fieldset>
             <legend>終了日</legend>
             年：<input type="text" id="endYear" size="4" placeholder="2025">
@@ -47,7 +47,6 @@
 
         <div class="menu-container">
           <div id="menu2" class="menu hidden">
-            <button type="button" onclick="handleAction('アクション1')">今日</button>
             <button type="button" onclick="handleAction('アクション2')">保存</button>
             <button type="button" onclick="handleAction('アクション3')">呼出</button>
             <button type="button" class="close-btn" onclick="closeMenu('menu2')">×</button>
