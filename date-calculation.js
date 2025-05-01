@@ -40,19 +40,7 @@ window.addEventListener('DOMContentLoaded', () => {
   populateSelect('endDay', 1, 31);
 });
 
-function toggleMenu() {
-  const menu = document.getElementById('menu');
-  menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
-}
-
-function showToast(message) {
-  const toast = document.createElement('div');
-  toast.className = 'toast';
-  toast.textContent = message;
-  document.body.appendChild(toast);
-
-  setTimeout(() => {
-    toast.remove();
-  }, 3000); // 3秒後に削除
+function sample() {
+  console.log(1)
 }
 

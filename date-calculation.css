@@ -40,37 +40,9 @@ label, input, button {
   margin: 0.2em 0;
 }
 
-#menu {
-  display: none;
-  border: 1px solid #ccc;
-  padding: 10px;
-  width: 200px;
-  background-color: #f9f9f9;
-  position: absolute;
-}
-
-#menu button {
-  display: block;
-  width: 100%;
-  margin: 5px 0;
-}
-
-.toast {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  background-color: #333;
-  color: #fff;
-  padding: 12px 20px;
-  border-radius: 8px;
-  opacity: 0.9;
-  z-index: 1000;
-  animation: fadeOut 0.5s ease-in-out 2.5s forwards;
-}
-
-@keyframes fadeOut {
-  to {
-    opacity: 0;
-    transform: translateY(20px);
-  }
+.fieldset-with-menu {
+  display: flex;
+  align-items: flex-start;
+  gap: 1em;
+  margin-bottom: 1em;
 }
