@@ -1,0 +1,76 @@
+body {
+  margin: 0;
+  padding: 1em 0;
+  font-family: sans-serif;
+  background-color: #f9f9f9;
+  display: flex;
+  justify-content: center;
+}
+
+.container {
+  text-align: center;
+  padding: 1.2em 1em; /* 上下を少しだけ狭く */
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  max-width: 600px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+header {
+  background-color: #f0f0f0;
+  padding: 0.6em 0;
+  border-bottom: 1px solid #ccc;
+  margin-bottom: 1em;
+}
+
+h1 {
+  margin: 0;
+  font-size: 1.4em;
+}
+
+form {
+  margin: 0.5em 0 1em 0;
+}
+
+label, input, button {
+  font-size: 1em;
+  margin: 0.2em 0;
+}
+
+#menu {
+  display: none;
+  border: 1px solid #ccc;
+  padding: 10px;
+  width: 200px;
+  background-color: #f9f9f9;
+  position: absolute;
+}
+
+#menu button {
+  display: block;
+  width: 100%;
+  margin: 5px 0;
+}
+
+.toast {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #333;
+  color: #fff;
+  padding: 12px 20px;
+  border-radius: 8px;
+  opacity: 0.9;
+  z-index: 1000;
+  animation: fadeOut 0.5s ease-in-out 2.5s forwards;
+}
+
+@keyframes fadeOut {
+  to {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+}

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>日数計算ツール</title>
+  <link rel="stylesheet" href="date-calculation.css">
+</head>
+<body>
+  <div class="container">
+    <h1>日数計算ツール</h1>
+
+    <form id="dateForm">
+      <fieldset>
+        <legend>開始日</legend>
+        年：<input type="text" id="startYear" size="4" placeholder="2025">
+        月：
+        <select id="startMonth"></select>
+        日：
+        <select id="startDay"></select>
+      </fieldset>
+      <button onclick="toggleMenu()">メニューを表示</button>
+
+      <div id="menu">
+        <button onclick="showToast('アクション1を実行しました')">アクション1</button>
+        <button onclick="showToast('アクション2を実行しました')">アクション2</button>
+        <button onclick="showToast('アクション3を実行しました')">アクション3</button>
+      </div>
+      <br>
+      <fieldset>
+        <legend>終了日</legend>
+        年：<input type="text" id="endYear" size="4" placeholder="2025">
+        月：
+        <select id="endMonth"></select>
+        日：
+        <select id="endDay"></select>
+      </fieldset>
+      <button onclick="toggleMenu()">メニューを表示</button>
+
+      <div id="menu">
+        <button onclick="showToast('アクション1を実行しました')">アクション1</button>
+        <button onclick="showToast('アクション2を実行しました')">アクション2</button>
+        <button onclick="showToast('アクション3を実行しました')">アクション3</button>
+      </div>
+      <br>
+      <button type="button" onclick="calculateDays()">計算</button>
+    </form>
+
+    <h2>結果</h2>
+    <p id="result">ここに結果が表示されます。</p>
+  </div>
+
+  <script src="date-calculation.js"></script>
+</body>
+</html>
