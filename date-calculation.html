@@ -10,35 +10,57 @@
     <h1>日数計算ツール</h1>
 
     <form id="dateForm">
-      <div class="fieldset-with-menu">
-        <fieldset>
-          <legend>開始日</legend>
-          年：<input type="text" id="startYear" size="4" placeholder="2025">
-          月：
-          <select id="startMonth"></select>
-          日：
-          <select id="startDay"></select>
-        </fieldset>
-        <button type="button" onclick="sample()">メニュー</button>
+      <div class="a">
+        <div class="fieldset-with-menu">
+          <fieldset>
+            <legend>開始日</legend>
+            年：<input type="text" id="startYear" size="4" placeholder="2025">
+            月：
+            <select id="startMonth"></select>
+            日：
+            <select id="startDay"></select>
+          </fieldset>
+          <button type="button" onclick="toggleActionMenu('menu1')">メニュー</button>
+        </div>
+      
+        <div class="menu-container">
+          <div id="menu1" class="menu hidden">
+            <button type="button" onclick="handleAction('アクション1')">今日</button>
+            <button type="button" onclick="handleAction('アクション2')">保存</button>
+            <button type="button" onclick="handleAction('アクション3')">呼出</button>
+            <button type="button" class="close-btn" onclick="closeMenu('menu1')">×</button>
+          </div>
+        </div>
       </div>
-      <br>
-      <div class="fieldset-with-menu">
-      <fieldset>
-        <legend>終了日</legend>
-        年：<input type="text" id="endYear" size="4" placeholder="2025">
-        月：
-        <select id="endMonth"></select>
-        日：
-        <select id="endDay"></select>
-      </fieldset>
-      <button type="button" onclick="sample()">メニュー</button>
-    </div>
-      <br>
+      <div class="a">
+        <div class="fieldset-with-menu">
+          <fieldset>
+            <legend>終了日</legend>
+            年：<input type="text" id="endYear" size="4" placeholder="2025">
+            月：
+            <select id="endMonth"></select>
+            日：
+            <select id="endDay"></select>
+          </fieldset>
+        <button type="button" onclick="toggleActionMenu('menu2')">メニュー</button>
+        </div>
+
+        <div class="menu-container">
+          <div id="menu2" class="menu hidden">
+            <button type="button" onclick="handleAction('アクション1')">今日</button>
+            <button type="button" onclick="handleAction('アクション2')">保存</button>
+            <button type="button" onclick="handleAction('アクション3')">呼出</button>
+            <button type="button" class="close-btn" onclick="closeMenu('menu2')">×</button>
+          </div>
+        </div>
+     </div>
       <button type="button" onclick="calculateDays()">計算</button>
     </form>
 
     <h2>結果</h2>
-    <p id="result">ここに結果が表示されます。</p>
+    <p id="result1"></p>
+    <p id="result2"></p>
+    <p id="result3"></p>
   </div>
 
   <script src="date-calculation.js"></script>
