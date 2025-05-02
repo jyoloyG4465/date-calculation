@@ -4,64 +4,70 @@
   <meta charset="UTF-8">
   <title>日数計算ツール</title>
   <link rel="stylesheet" href="date-calculation.css">
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
 </head>
 <body>
   <div class="container">
     <h1>日数計算ツール</h1>
 
     <form id="dateForm">
-      <div class="field-menu1">
+      <!-- 開始日 -->
+      <div class="field-start">
         <div class="fieldset-with-menu">
           <fieldset>
             <legend>開始日</legend>
             年：<input type="text" id="startYear" size="4" placeholder="2025">
-            月：
-            <select id="startMonth"></select>
-            日：
-            <select id="startDay"></select>
+            月：<select id="startMonth"></select>
+            日：<select id="startDay"></select>
           </fieldset>
-          <button type="button" onclick="toggleActionMenu('menu1')">メニュー</button>
+          <button type="button" onclick="toggleActionMenu('start')">メニュー</button>
         </div>
-      
         <div class="menu-container">
-          <div id="menu1" class="menu hidden">
-            <button type="button" onclick="handleAction('アクション1')">今日</button>
-            <button type="button" onclick="handleAction('アクション2')">保存</button>
-            <button type="button" onclick="handleAction('アクション3')">呼出</button>
-            <button type="button" class="close-btn" onclick="closeMenu('menu1')">×</button>
+          <div id="start" class="menu hidden">
+            <button type="button" onclick="setToday()">今日</button>
+            <button type="button" onclick="setDateInLocalStorage('start')">保存</button>
+            <button type="button" onclick="getDateInLocalStorage('start')">呼出</button>
+            <button type="button" class="close-btn" onclick="closeMenu('start')">×</button>
           </div>
         </div>
       </div>
-      <div class="field-menu2">
-        <div class="fieldset-with-menu field-menu2">
+
+      <!-- 終了日 -->
+      <div class="field-end">
+        <div class="fieldset-with-menu">
           <fieldset>
             <legend>終了日</legend>
             年：<input type="text" id="endYear" size="4" placeholder="2025">
-            月：
-            <select id="endMonth"></select>
-            日：
-            <select id="endDay"></select>
+            月：<select id="endMonth"></select>
+            日：<select id="endDay"></select>
           </fieldset>
-        <button type="button" onclick="toggleActionMenu('menu2')">メニュー</button>
+          <button type="button" onclick="toggleActionMenu('end')">メニュー</button>
         </div>
-
         <div class="menu-container">
-          <div id="menu2" class="menu hidden">
-            <button type="button" onclick="handleAction('アクション2')">保存</button>
-            <button type="button" onclick="handleAction('アクション3')">呼出</button>
-            <button type="button" class="close-btn" onclick="closeMenu('menu2')">×</button>
+          <div id="end" class="menu hidden">
+            <button type="button" onclick="setDateInLocalStorage('end')">保存</button>
+            <button type="button" onclick="getDateInLocalStorage('end')">呼出</button>
+            <button type="button" class="close-btn" onclick="closeMenu('end')">×</button>
           </div>
         </div>
-     </div>
+      </div>
+
       <button type="button" onclick="calculateDays()">計算</button>
     </form>
 
+    <!-- 結果表示 -->
     <h2>結果</h2>
     <p id="result1"></p>
     <p id="result2"></p>
     <p id="result3"></p>
 
+    <!-- 注意事項 -->
     <h2>このサイトについて</h2>
+    <div class="small-text">
+      <span>・本ツールでは、入力した日付情報をローカルストレージに保存します。データはブラウザを閉じても保持され、次回アクセス時に自動的に読み込まれます。</span><br>
+      <span>・保存されたデータは、ブラウザの設定でクリアするまで保持され、他のウェブサイトからはアクセスできません。</span><br>
+      <span>・ローカルストレージ内のデータは、ブラウザの設定でクリアするまで保持され、他のウェブサイトからはアクセスできません。</span>
+    </div>
   </div>
 
   <script src="date-calculation.js"></script>

@@ -4,22 +4,22 @@ const month = today.getMonth() + 1;
 const day = today.getDate();
 
 window.addEventListener('DOMContentLoaded', () => {
-  setYear("startYear")
-  setYear("endYear")
-  setSelect('startMonth', 1, 12);
-  setSelect('endMonth', 1, 12);
-  setSelect('startDay', 1, 31);
-  setSelect('endDay', 1, 31);
+  setInitYear("startYear")
+  setInitYear("endYear")
+  setInitSelect('startMonth', 1, 12);
+  setInitSelect('endMonth', 1, 12);
+  setInitSelect('startDay', 1, 31);
+  setInitSelect('endDay', 1, 31);
 });
 
 // テキストボックスに年を設定する
-function setYear(id){
+function setInitYear(id){
   const selector = document.getElementById(id);
   selector.value = year
 }
 
 // セレクトボックスの選択肢を動的に生成する
-function setSelect(id, min, max) {
+function setInitSelect(id, min, max) {
   const selector = document.getElementById(id);
   for (let i = min; i <= max; i++) {
     const option = document.createElement('option');
@@ -40,76 +40,144 @@ function setSelect(id, min, max) {
 // メニューを開く
 function toggleActionMenu(menuId) {
   const menu = document.getElementById(menuId);
-  const fieldsetContainer = document.querySelector(`.field-${menuId}`);
+  const fieldSelector = document.querySelector(`.field-${menuId}`);
 
   if (menu.classList.contains('hidden')) {
     menu.classList.remove('hidden');
-    fieldsetContainer.style.marginBottom = '70px';
+    fieldSelector.style.marginBottom = '80px';
   } else {
     menu.classList.add('hidden');
-    fieldsetContainer.style.marginBottom = ''; // 元に戻す
+    fieldSelector.style.marginBottom = ''; // 元に戻す
   }
 }
 
 // メニューを閉じる
 function closeMenu(menuId) {
   const menu = document.getElementById(menuId);
-  const fieldsetContainer = document.querySelector(`.field-${menuId}`);
+  const fieldSelector = document.querySelector(`.field-${menuId}`);
   menu.classList.add("hidden");
-  fieldsetContainer.style.marginBottom = ''; // 元に戻す
+  fieldSelector.style.marginBottom = ''; // 元に戻す
 }
 
 // 日数を計算する
 function calculateDays() {
-  const sy = document.getElementById('startYear').value;
-  const sm = document.getElementById('startMonth').value;
-  const sd = document.getElementById('startDay').value;
+  const startYear = document.getElementById('startYear').value;
+  const startMonth = document.getElementById('startMonth').value;
+  const startDay = document.getElementById('startDay').value;
+  const endYear = document.getElementById('endYear').value;
+  const endMonth = document.getElementById('endMonth').value;
+  const endDay = document.getElementById('endDay').value;
 
-  const ey = document.getElementById('endYear').value;
-  const em = document.getElementById('endMonth').value;
-  const ed = document.getElementById('endDay').value;
+  const validationMessage = validateYearInput(startYear, endYear);
 
-  if (sy == '' || ey == '') {
-    document.getElementById('result1').textContent = "年が空欄になっています。";
+  if (validationMessage) {
+    document.getElementById('result1').textContent = validationMessage;
     document.getElementById('result2').textContent = "";
     document.getElementById('result3').textContent = "";
     return;
   }
 
-  const start = new Date(`${sy}-${sm}-${sd}`);
-  const end = new Date(`${ey}-${em}-${ed}`);
-
-  if (isNaN(start.getTime()) || isNaN(end.getTime())) {
-    document.getElementById('result1').textContent = "日付の形式が正しくありません。";
-    document.getElementById('result2').textContent = "";
-    document.getElementById('result3').textContent = "";
-    return;
-  }
-
-  const diffTime = end - start;
+  const startTime = new Date(`${startYear}-${startMonth}-${startDay}`);
+  const endTime = new Date(`${endYear}-${endMonth}-${endDay}`);
+  const diffTime = endTime - startTime;
   const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
-  const weeks = Math.floor(diffDays / 7); // 週数
-  const days = diffDays % 7; 
+  const totalWeeks = Math.floor(diffDays / 7); // 週数
+  const remainingWeekDays = diffDays % 7; 
+
   // 年月差の計算
-  let totalMonths = (end.getFullYear() - start.getFullYear()) * 12 + (end.getMonth() - start.getMonth());
-  let adjustedStart = new Date(start);
-  adjustedStart.setMonth(start.getMonth() + totalMonths);
+  let totalMonths = (endTime.getFullYear() - startTime.getFullYear()) * 12 + (endTime.getMonth() - startTime.getMonth());
+  let adjustedStartTime = new Date(startTime);
+  adjustedStartTime.setMonth(startTime.getMonth() + totalMonths);
 
   // 日が足りていない場合、1ヶ月減らして再調整
-  if (adjustedStart > end) {
+  if (adjustedStartTime > endTime) {
     totalMonths--;
-    adjustedStart = new Date(start);
-    adjustedStart.setMonth(start.getMonth() + totalMonths);
+    adjustedStartTime = new Date(startTime);
+    adjustedStartTime.setMonth(startTime.getMonth() + totalMonths);
   }
 
   // 残りの日数を計算
-  const remainingTime = end - adjustedStart;
-  const remainingDays = Math.floor(remainingTime / (1000 * 60 * 60 * 24));
+  const remainingTime = endTime - adjustedStartTime;
+  const remainingMonthDays = Math.floor(remainingTime / (1000 * 60 * 60 * 24));
 
-  document.getElementById('result1').textContent =
-    `日数差： ${diffDays} 日です。`;
-  document.getElementById('result2').textContent =
-  `週数差： ${weeks} 週と${days} 日です。`;
-  document.getElementById('result3').textContent =
-  `月数差： ${totalMonths} 月と${remainingDays} 日です。`;
+  document.getElementById('result1').textContent = `日数差： ${diffDays} 日です。`;
+  document.getElementById('result2').textContent = `週数差： ${totalWeeks} 週と${remainingWeekDays} 日です。`;
+  document.getElementById('result3').textContent = `月数差： ${totalMonths} ヶ月と${remainingMonthDays} 日です。`;
+}
+
+// 年の入力値をバリデーションする
+function validateYearInput(startYear, endYear) {
+
+  function isHalfWidthNumeric(str) {
+    return /^[0-9]+$/.test(str);
+  }
+
+  function isOverMinimumNum(str) {
+    return isHalfWidthNumeric(str) && Number(str) >= 1900;
+  }
+
+  if (startYear === '' || endYear === '') {
+    return "年が空欄になっています。";
+  }
+  if (!isHalfWidthNumeric(startYear) || !isHalfWidthNumeric(endYear)) {
+    return "正常な数字を入力してください。";
+  }
+  if (!isOverMinimumNum(startYear) || !isOverMinimumNum(endYear)) {
+    return "1900以上の数値を設定してください。";
+  }
+  
+  return null;
+}
+
+// 今日の日付を設定する
+function setToday() {
+  document.getElementById('startYear').value = year;
+  document.getElementById('startMonth').value = month;
+  document.getElementById('startDay').value = day;
+}
+
+// ローカルストレージに日付を設定する
+function setDateInLocalStorage(prefix) {
+  const year = document.getElementById(`${prefix}Year`).value;
+  const month = document.getElementById(`${prefix}Month`).value;
+  const day = document.getElementById(`${prefix}Day`).value;
+
+  const dateData = {year, month, day};
+
+  localStorage.setItem(`${prefix}Day`, JSON.stringify(dateData));
+  showToast(`設定を保存しました`);
+}
+
+// ローカルストレージから日付を取得する
+function getDateInLocalStorage(prefix) {
+  const saved = localStorage.getItem(`${prefix}Day`);
+  if (saved) {
+    const { year, month, day } = JSON.parse(saved);
+    document.getElementById(`${prefix}Year`).value = year;
+    document.getElementById(`${prefix}Month`).value = month;
+    document.getElementById(`${prefix}Day`).value = day;
+    showToast(`保存設定を読み込みました`);
+  } else {
+    showToast(`保存されたデータがありません`);
+  }
+}
+
+// トーストを表示する
+function showToast(message) {
+  const existing = document.getElementById('toast');
+
+  if (existing) {
+    existing.remove();
+  }
+
+  const toast = document.createElement('div');
+  toast.id = 'toast';
+  toast.className = 'toast'; // ← クラスを指定
+  toast.textContent = message;
+
+  document.body.appendChild(toast);
+
+  setTimeout(() => {
+    toast.remove();
+  }, 2000);
 }
