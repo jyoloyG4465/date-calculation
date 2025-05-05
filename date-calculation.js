@@ -4,8 +4,8 @@ const month = today.getMonth() + 1;
 const day = today.getDate();
 
 window.addEventListener('DOMContentLoaded', () => {
-  setInitYear("startYear")
-  setInitYear("endYear")
+  setInitYear("startYear");
+  setInitYear("endYear");
   setInitSelect('startMonth', 1, 12);
   setInitSelect('endMonth', 1, 12);
   setInitSelect('startDay', 1, 31);
@@ -13,9 +13,9 @@ window.addEventListener('DOMContentLoaded', () => {
 });
 
 // テキストボックスに年を設定する
-function setInitYear(id){
+function setInitYear(id) {
   const selector = document.getElementById(id);
-  selector.value = year
+  selector.value = year;
 }
 
 // セレクトボックスの選択肢を動的に生成する
@@ -28,16 +28,16 @@ function setInitSelect(id, min, max) {
     selector.appendChild(option);
   }
 
-  if(id == 'startMonth'){
-    selector.value = month
-  } else if(id == 'endMonth'){
-    selector.value = month + 1
+  if (id === 'startMonth') {
+    selector.value = month;
+  } else if (id === 'endMonth') {
+    selector.value = month + 1;
   } else {
-    selector.value = day
+    selector.value = day;
   }
 }
 
-// メニューを開く
+// メニューを開く・閉じる
 function toggleActionMenu(menuId) {
   const menu = document.getElementById(menuId);
   const fieldSelector = document.querySelector(`.field-${menuId}`);
@@ -47,16 +47,15 @@ function toggleActionMenu(menuId) {
     fieldSelector.style.marginBottom = '80px';
   } else {
     menu.classList.add('hidden');
-    fieldSelector.style.marginBottom = ''; // 元に戻す
+    fieldSelector.style.marginBottom = '';
   }
 }
 
-// メニューを閉じる
 function closeMenu(menuId) {
   const menu = document.getElementById(menuId);
   const fieldSelector = document.querySelector(`.field-${menuId}`);
   menu.classList.add("hidden");
-  fieldSelector.style.marginBottom = ''; // 元に戻す
+  fieldSelector.style.marginBottom = '';
 }
 
 // 日数を計算する
@@ -81,33 +80,29 @@ function calculateDays() {
   const endTime = new Date(`${endYear}-${endMonth}-${endDay}`);
   const diffTime = endTime - startTime;
   const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
-  const totalWeeks = Math.floor(diffDays / 7); // 週数
-  const remainingWeekDays = diffDays % 7; 
+  const totalWeeks = Math.floor(diffDays / 7);
+  const remainingWeekDays = diffDays % 7;
 
-  // 年月差の計算
   let totalMonths = (endTime.getFullYear() - startTime.getFullYear()) * 12 + (endTime.getMonth() - startTime.getMonth());
   let adjustedStartTime = new Date(startTime);
   adjustedStartTime.setMonth(startTime.getMonth() + totalMonths);
 
-  // 日が足りていない場合、1ヶ月減らして再調整
   if (adjustedStartTime > endTime) {
     totalMonths--;
     adjustedStartTime = new Date(startTime);
     adjustedStartTime.setMonth(startTime.getMonth() + totalMonths);
   }
 
-  // 残りの日数を計算
   const remainingTime = endTime - adjustedStartTime;
   const remainingMonthDays = Math.floor(remainingTime / (1000 * 60 * 60 * 24));
 
   document.getElementById('result1').textContent = `日数差： ${diffDays} 日です。`;
-  document.getElementById('result2').textContent = `週数差： ${totalWeeks} 週と${remainingWeekDays} 日です。`;
-  document.getElementById('result3').textContent = `月数差： ${totalMonths} ヶ月と${remainingMonthDays} 日です。`;
+  document.getElementById('result2').textContent = `週数差： ${totalWeeks} 週と ${remainingWeekDays} 日です。`;
+  document.getElementById('result3').textContent = `月数差： ${totalMonths} ヶ月と ${remainingMonthDays} 日です。`;
 }
 
 // 年の入力値をバリデーションする
 function validateYearInput(startYear, endYear) {
-
   function isHalfWidthNumeric(str) {
     return /^[0-9]+$/.test(str);
   }
@@ -125,7 +120,7 @@ function validateYearInput(startYear, endYear) {
   if (!isOverMinimumNum(startYear) || !isOverMinimumNum(endYear)) {
     return "1900以上の数値を設定してください。";
   }
-  
+
   return null;
 }
 
@@ -142,8 +137,7 @@ function setDateInLocalStorage(prefix) {
   const month = document.getElementById(`${prefix}Month`).value;
   const day = document.getElementById(`${prefix}Day`).value;
 
-  const dateData = {year, month, day};
-
+  const dateData = { year, month, day };
   localStorage.setItem(`${prefix}Day`, JSON.stringify(dateData));
   showToast(`設定を保存しました`);
 }
@@ -165,14 +159,13 @@ function getDateInLocalStorage(prefix) {
 // トーストを表示する
 function showToast(message) {
   const existing = document.getElementById('toast');
-
   if (existing) {
     existing.remove();
   }
 
   const toast = document.createElement('div');
   toast.id = 'toast';
-  toast.className = 'toast'; // ← クラスを指定
+  toast.className = 'toast';
   toast.textContent = message;
 
   document.body.appendChild(toast);
