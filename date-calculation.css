@@ -48,7 +48,7 @@ select {
   border: 1px solid #ddd;
   border-radius: 10px;
   box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-  max-width: 900px;
+  max-width: 430px;
   width: 100%;
   box-sizing: border-box;
 }
@@ -81,7 +81,7 @@ select {
 .menu {
   position: absolute;
   top: 100%;
-  left: 37%;
+  left: 25%; /* 画面の横半分の位置 */
   background: #fff;
   border: 1px solid #ccc;
   padding: 4px;
