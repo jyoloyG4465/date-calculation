@@ -25,24 +25,14 @@
               月：<select id="startMonth"></select>
               日：<select id="startDay"></select>
             </fieldset>
-            <button type="button" onclick="toggleActionMenu('start')">
-              ⚙️
-            </button>
+            <button type="button" class="toggle-menu-start">⚙️</button>
           </div>
           <div class="menu-container">
             <div id="start" class="menu hidden">
-              <button type="button" onclick="setToday()">今日</button>
-              <button type="button" onclick="setDateInLocalStorage('start')">
-                保存
-              </button>
-              <button type="button" onclick="getDateInLocalStorage('start')">
-                呼出
-              </button>
-              <button
-                type="button"
-                class="close-btn"
-                onclick="closeMenu('start')"
-              >
+              <button type="button" class="set-today">今日</button>
+              <button type="button" class="save-date-start">保存</button>
+              <button type="button" class="load-date-start">呼出</button>
+              <button type="button" class="close-btn close-menu-start">
                 ×
               </button>
             </div>
@@ -58,28 +48,18 @@
               月：<select id="endMonth"></select>
               日：<select id="endDay"></select>
             </fieldset>
-            <button type="button" onclick="toggleActionMenu('end')">⚙️</button>
+            <button type="button" class="toggle-menu-end">⚙️</button>
           </div>
           <div class="menu-container">
             <div id="end" class="menu hidden">
-              <button type="button" onclick="setDateInLocalStorage('end')">
-                保存
-              </button>
-              <button type="button" onclick="getDateInLocalStorage('end')">
-                呼出
-              </button>
-              <button
-                type="button"
-                class="close-btn"
-                onclick="closeMenu('end')"
-              >
-                ×
-              </button>
+              <button type="button" class="save-date-end">保存</button>
+              <button type="button" class="load-date-end">呼出</button>
+              <button type="button" class="close-btn close-menu-end">×</button>
             </div>
           </div>
         </div>
 
-        <button type="button" onclick="calculateDays()">計算</button>
+        <button type="button" id="calculateButton">計算</button>
       </form>
 
       <!-- 結果表示 -->
