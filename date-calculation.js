@@ -43,13 +43,6 @@
     }
   }
 
-  function closeMenu(menuId) {
-    const menu = document.getElementById(menuId);
-    const fieldSelector = document.querySelector(`.field-${menuId}`);
-    menu.classList.add("hidden");
-    fieldSelector.style.marginBottom = '';
-  }
-
   // ヘルパー関数：日付が有効かどうかをチェックする
   function isValidDate(year, month, day) {
     const date = new Date(year, month - 1, day); // monthは0-indexed
@@ -209,12 +202,12 @@
     document.querySelector('.set-today').addEventListener('click', setToday);
     document.querySelector('.save-date-start').addEventListener('click', () => setDateInLocalStorage('start'));
     document.querySelector('.load-date-start').addEventListener('click', () => getDateInLocalStorage('start'));
-    document.querySelector('.close-menu-start').addEventListener('click', () => closeMenu('start'));
+    document.querySelector('.close-menu-start').addEventListener('click', () => toggleActionMenu('start')); // closeMenuからtoggleActionMenuに変更
 
     document.querySelector('.toggle-menu-end').addEventListener('click', () => toggleActionMenu('end'));
     document.querySelector('.save-date-end').addEventListener('click', () => setDateInLocalStorage('end'));
     document.querySelector('.load-date-end').addEventListener('click', () => getDateInLocalStorage('end'));
-    document.querySelector('.close-menu-end').addEventListener('click', () => closeMenu('end'));
+    document.querySelector('.close-menu-end').addEventListener('click', () => toggleActionMenu('end')); // closeMenuからtoggleActionMenuに変更
 
     document.getElementById('calculateButton').addEventListener('click', calculateDays);
   });
