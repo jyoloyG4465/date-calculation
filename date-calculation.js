@@ -50,35 +50,48 @@
     fieldSelector.style.marginBottom = '';
   }
 
+  // ヘルパー関数：日付が有効かどうかをチェックする
+  function isValidDate(year, month, day) {
+    const date = new Date(year, month - 1, day); // monthは0-indexed
+    return date.getFullYear() === year &&
+           date.getMonth() === month - 1 &&
+           date.getDate() === day;
+  }
+
   // 日数を計算する
   function calculateDays() {
-    const startYear = document.getElementById('startYear').value;
-    const startMonth = document.getElementById('startMonth').value;
-    const startDay = document.getElementById('startDay').value;
-    const endYear = document.getElementById('endYear').value;
-    const endMonth = document.getElementById('endMonth').value;
-    const endDay = document.getElementById('endDay').value;
+    const startYear = parseInt(document.getElementById('startYear').value, 10);
+    const startMonth = parseInt(document.getElementById('startMonth').value, 10);
+    const startDay = parseInt(document.getElementById('startDay').value, 10);
+    const endYear = parseInt(document.getElementById('endYear').value, 10);
+    const endMonth = parseInt(document.getElementById('endMonth').value, 10);
+    const endDay = parseInt(document.getElementById('endDay').value, 10);
 
-    const validationMessage = validateYearInput(startYear, endYear);
-
-    if (validationMessage) {
-      document.getElementById('result1').textContent = validationMessage;
+    // 年のバリデーション (既存)
+    const yearValidationMessage = validateYearInput(startYear, endYear);
+    if (yearValidationMessage) {
+      document.getElementById('result1').textContent = yearValidationMessage;
       document.getElementById('result2').textContent = "";
       document.getElementById('result3').textContent = "";
       return;
     }
 
-    // Dateオブジェクトの生成をより安全な形式に変更
-    const startTime = new Date(parseInt(startYear, 10), parseInt(startMonth, 10) - 1, parseInt(startDay, 10));
-    const endTime = new Date(parseInt(endYear, 10), parseInt(endMonth, 10) - 1, parseInt(endDay, 10));
-
-    // 無効な日付のチェック
-    if (isNaN(startTime.getTime()) || isNaN(endTime.getTime())) {
-      document.getElementById('result1').textContent = "有効な日付を入力してください。";
+    // 日付の存在チェック
+    if (!isValidDate(startYear, startMonth, startDay)) {
+      document.getElementById('result1').textContent = "開始日が不正な日付です。";
       document.getElementById('result2').textContent = "";
       document.getElementById('result3').textContent = "";
       return;
     }
+    if (!isValidDate(endYear, endMonth, endDay)) {
+      document.getElementById('result1').textContent = "終了日が不正な日付です。";
+      document.getElementById('result2').textContent = "";
+      document.getElementById('result3').textContent = "";
+      return;
+    }
+
+    const startTime = new Date(startYear, startMonth - 1, startDay);
+    const endTime = new Date(endYear, endMonth - 1, endDay);
 
     // 開始日が終了日より後の日付でないことをチェック
     if (startTime > endTime) {
@@ -121,11 +134,8 @@
       return isHalfWidthNumeric(str) && Number(str) >= 1900;
     }
 
-    if (startYear === '' || endYear === '') {
-      return "年が空欄になっています。";
-    }
-    if (!isHalfWidthNumeric(startYear) || !isHalfWidthNumeric(endYear)) {
-      return "正常な数字を入力してください。";
+    if (isNaN(startYear) || isNaN(endYear)) {
+      return "年が空欄になっているか、数字ではありません。";
     }
     if (!isOverMinimumNum(startYear) || !isOverMinimumNum(endYear)) {
       return "1900以上の数値を設定してください。";
