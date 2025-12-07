@@ -23,7 +23,7 @@
     if (id === 'startMonth') {
       selector.value = month;
     } else if (id === 'endMonth') {
-      selector.value = month + 1;
+      selector.value = (month % 12) + 1;
     } else {
       selector.value = day;
     }
