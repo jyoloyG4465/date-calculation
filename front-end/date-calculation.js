@@ -7,7 +7,11 @@
   // テキストボックスに年を設定する
   function setInitYear(id) {
     const selector = document.getElementById(id);
-    selector.value = year;
+    if (id === 'endYear' && month === 12) {
+      selector.value = year + 1;
+    } else {
+      selector.value = year;
+    }
   }
 
   // セレクトボックスの選択肢を動的に生成する
