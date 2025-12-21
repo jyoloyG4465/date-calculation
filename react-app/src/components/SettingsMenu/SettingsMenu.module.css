@@ -1,49 +1,62 @@
-.menuContainer {
+.menuWrapper {
   position: relative;
+  display: inline-block;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 99;
+}
+
+.toggleButton {
+  padding: 8px 12px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background: #fff;
+  cursor: pointer;
+}
+
+.toggleButton:hover {
+  background: #f5f5f5;
 }
 
 .menu {
   position: absolute;
   top: 100%;
-  left: 0;
-  right: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-top: 4px;
   background: #fff;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  padding: 4px;
-  z-index: 10;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 4px;
-  max-width: 200px;
-}
-
-.menuButton {
-  flex: 1;
-  min-width: 50px;
-  padding: 8px 12px;
   border: 1px solid #ccc;
   border-radius: 4px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  z-index: 100;
+  min-width: 80px;
+  overflow: hidden;
+}
+
+.menuItem {
+  display: block;
+  width: 100%;
+  padding: 8px 16px;
+  border: none;
   background: #fff;
   cursor: pointer;
   font-size: 14px;
+  text-align: left;
+  white-space: nowrap;
 }
 
-.menuButton:hover {
-  background: #f5f5f5;
-}
-
-.closeButton {
-  padding: 8px 12px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  background: red;
+.menuItem:hover {
+  background: #007bff;
   color: #fff;
-  cursor: pointer;
-  font-size: 14px;
 }
 
-.closeButton:hover {
-  background: #cc0000;
+.menuItem:not(:last-child) {
+  border-bottom: 1px solid #eee;
 }

@@ -58,10 +58,7 @@ export function DateField({ type, label, value, onChange }: DateFieldProps) {
   };
 
   return (
-    <div
-      className={styles.field}
-      style={{ marginBottom: isMenuOpen ? '80px' : undefined }}
-    >
+    <div className={styles.field}>
       <div className={styles.fieldsetWithMenu}>
         <fieldset className={styles.fieldset}>
           <legend>{label}</legend>
@@ -100,22 +97,16 @@ export function DateField({ type, label, value, onChange }: DateFieldProps) {
             <span>日</span>
           </div>
         </fieldset>
-        <button
-          type="button"
-          className={styles.menuToggle}
-          onClick={() => setIsMenuOpen(!isMenuOpen)}
-        >
-          ⚙
-        </button>
+        <SettingsMenu
+          type={type}
+          isOpen={isMenuOpen}
+          onToggle={() => setIsMenuOpen(!isMenuOpen)}
+          onClose={() => setIsMenuOpen(false)}
+          onToday={type === 'start' ? handleToday : undefined}
+          onSave={handleSave}
+          onLoad={handleLoad}
+        />
       </div>
-      <SettingsMenu
-        type={type}
-        isOpen={isMenuOpen}
-        onClose={() => setIsMenuOpen(false)}
-        onToday={type === 'start' ? handleToday : undefined}
-        onSave={handleSave}
-        onLoad={handleLoad}
-      />
     </div>
   );
 }
