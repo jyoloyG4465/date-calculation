@@ -1,0 +1,54 @@
+.field {
+  margin-bottom: 16px;
+}
+
+.fieldsetWithMenu {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.fieldset {
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 8px 12px;
+}
+
+.fieldset legend {
+  padding: 0 8px;
+  font-weight: bold;
+}
+
+.inputGroup {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+}
+
+.yearInput {
+  width: 60px;
+  padding: 8px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  text-align: center;
+}
+
+.select {
+  padding: 8px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+@media (max-width: 600px) {
+  .fieldsetWithMenu {
+    flex-direction: column;
+  }
+
+  .fieldset {
+    width: 100%;
+  }
+}
