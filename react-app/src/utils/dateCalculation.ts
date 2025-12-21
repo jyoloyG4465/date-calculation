@@ -1,6 +1,79 @@
 import type { CalculationResult, DateValue } from "../types/date";
 
 /**
+ * 指定した月の末日を取得する
+ */
+function getLastDayOfMonth(year: number, month: number): number {
+  return new Date(year, month + 1, 0).getDate();
+}
+
+/**
+ * 日付が月末かどうかを判定する
+ */
+function isEndOfMonth(date: Date): boolean {
+  const lastDay = getLastDayOfMonth(date.getFullYear(), date.getMonth());
+  return date.getDate() === lastDay;
+}
+
+/**
+ * 開始日からNヶ月後の日付を計算する（月末考慮）
+ * @param startDate 開始日
+ * @param diffMonths 加算する月数
+ * @param preserveEndOfMonth 月末基準で計算するか
+ */
+function addMonths(
+  startDate: Date,
+  months: number,
+  preserveEndOfMonth: boolean
+): Date {
+  const result = new Date(startDate);
+
+  // 月を安全に設定するため、一旦1日に設定
+  result.setDate(1);
+  result.setMonth(startDate.getMonth() + months);
+
+  if (preserveEndOfMonth) {
+    // 月末基準：その月の末日に設定
+    result.setMonth(result.getMonth() + 1, 0);
+  } else {
+    // 元の日付を復元
+    result.setDate(startDate.getDate());
+  }
+
+  return result;
+}
+
+/**
+ * 2つの日付間の月数差を計算する
+ */
+function calculateMonthsDifference(
+  startDate: Date,
+  endDate: Date
+): { diffMonths: number; remainingMonthDays: number } {
+  const startIsEndOfMonth = isEndOfMonth(startDate);
+
+  // 年月の差から初期月数を計算
+  let diffMonths =
+    (endDate.getFullYear() - startDate.getFullYear()) * 12 +
+    (endDate.getMonth() - startDate.getMonth());
+
+  // 開始日からmonthsヶ月後の日付を計算
+  let adjustedDate = addMonths(startDate, diffMonths, startIsEndOfMonth);
+
+  // 調整後の日付が終了日を超えていたら1ヶ月戻す
+  if (adjustedDate > endDate) {
+    diffMonths--;
+    adjustedDate = addMonths(startDate, diffMonths, startIsEndOfMonth);
+  }
+
+  // 残り日数を計算
+  const remainingTime = endDate.getTime() - adjustedDate.getTime();
+  const remainingMonthDays = Math.floor(remainingTime / (1000 * 60 * 60 * 24));
+
+  return { diffMonths, remainingMonthDays };
+}
+
+/**
  * 2つの日付間の差を計算する
  */
 export function calculateDateDifference(
@@ -12,33 +85,23 @@ export function calculateDateDifference(
 
   // 日数差
   const diffTime = endDate.getTime() - startDate.getTime();
-  const days = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+  const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
 
   // 週数差
-  const weeks = Math.floor(days / 7);
-  const remainingWeekDays = days % 7;
+  const diffWeeks = Math.floor(diffDays / 7);
+  const remainingWeekDays = diffDays % 7;
 
   // 月数差
-  let months =
-    (endDate.getFullYear() - startDate.getFullYear()) * 12 +
-    (endDate.getMonth() - startDate.getMonth());
-
-  const adjustedStartDate = new Date(startDate);
-  adjustedStartDate.setMonth(startDate.getMonth() + months);
-
-  if (adjustedStartDate > endDate) {
-    months--;
-    adjustedStartDate.setMonth(startDate.getMonth() + months);
-  }
-
-  const remainingTime = endDate.getTime() - adjustedStartDate.getTime();
-  const remainingMonthDays = Math.floor(remainingTime / (1000 * 60 * 60 * 24));
+  const { diffMonths, remainingMonthDays } = calculateMonthsDifference(
+    startDate,
+    endDate
+  );
 
   return {
-    days,
-    weeks,
+    diffDays,
+    diffWeeks,
     remainingWeekDays,
-    months,
+    diffMonths,
     remainingMonthDays,
   };
 }
@@ -63,7 +126,7 @@ export function getInitialStartDate(): DateValue {
 }
 
 /**
- * 初期の終了日を取得する（翌月1日、12月なら翌年1月1日）
+ * 初期の終了日を取得する（翌月同日、12月なら翌年1月）
  */
 export function getInitialEndDate(): DateValue {
   const today = new Date();

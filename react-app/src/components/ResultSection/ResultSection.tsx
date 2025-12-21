@@ -15,13 +15,13 @@ export function ResultSection({ result, error }: ResultSectionProps) {
       ) : result ? (
         <>
           <p className={styles.result}>
-            日数差： {result.days} 日です。
+            日数差： {result.diffDays} 日です。
           </p>
           <p className={styles.result}>
-            週数差： {result.weeks} 週と {result.remainingWeekDays} 日です。
+            週数差： {result.diffWeeks} 週と {result.remainingWeekDays} 日です。
           </p>
           <p className={styles.result}>
-            月数差： {result.months} ヶ月と {result.remainingMonthDays} 日です。
+            月数差： {result.diffMonths} ヶ月と {result.remainingMonthDays} 日です。
           </p>
         </>
       ) : (

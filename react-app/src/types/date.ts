@@ -5,14 +5,14 @@ export interface DateValue {
 }
 
 export interface CalculationResult {
-  days: number;
-  weeks: number;
+  diffDays: number;
+  diffWeeks: number;
   remainingWeekDays: number;
-  months: number;
+  diffMonths: number;
   remainingMonthDays: number;
 }
 
 export interface ValidationError {
-  type: 'year' | 'date' | 'order';
+  type: "year" | "date" | "order";
   message: string;
 }
