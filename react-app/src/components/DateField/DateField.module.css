@@ -4,12 +4,12 @@
 
 .fieldsetWithMenu {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
+  justify-content: center;
   gap: 8px;
 }
 
 .fieldset {
-  flex: 1;
   border: 1px solid #ccc;
   border-radius: 4px;
   padding: 8px 12px;
@@ -23,8 +23,8 @@
 .inputGroup {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 4px;
-  flex-wrap: wrap;
 }
 
 .yearInput {

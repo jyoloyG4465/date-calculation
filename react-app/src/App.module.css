@@ -2,7 +2,7 @@
   max-width: 430px;
   width: 100%;
   margin: 0 auto;
-  padding: 20px 16px;
+  padding: 0px 16px 20px 16px;
   background: #fff;
   border: 1px solid #ddd;
   border-radius: 8px;
@@ -11,7 +11,7 @@
 }
 
 .title {
-  font-size: 24px;
+  font-size: 36px;
   margin-bottom: 16px;
 }
 
@@ -20,8 +20,7 @@
 }
 
 .calculateButton {
-  width: 100%;
-  padding: 12px;
+  padding: 12px 24px;
   font-size: 18px;
   background: #007bff;
   color: #fff;
