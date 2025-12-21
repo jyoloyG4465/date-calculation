@@ -1,0 +1,48 @@
+.menuContainer {
+  position: relative;
+}
+
+.menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 4px;
+  z-index: 10;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  max-width: 200px;
+}
+
+.menuButton {
+  flex: 1;
+  min-width: 50px;
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background: #fff;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.menuButton:hover {
+  background: #f5f5f5;
+}
+
+.closeButton {
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background: red;
+  color: #fff;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.closeButton:hover {
+  background: #cc0000;
+}

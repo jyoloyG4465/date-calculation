@@ -1,0 +1,67 @@
+.field {
+  margin-bottom: 16px;
+}
+
+.fieldsetWithMenu {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.fieldset {
+  flex: 1;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 8px 12px;
+}
+
+.fieldset legend {
+  padding: 0 8px;
+  font-weight: bold;
+}
+
+.inputGroup {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex-wrap: wrap;
+}
+
+.yearInput {
+  width: 60px;
+  padding: 8px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  text-align: center;
+}
+
+.select {
+  padding: 8px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.menuToggle {
+  padding: 8px 12px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background: #fff;
+  cursor: pointer;
+}
+
+.menuToggle:hover {
+  background: #f5f5f5;
+}
+
+@media (max-width: 600px) {
+  .fieldsetWithMenu {
+    flex-direction: column;
+  }
+
+  .fieldset {
+    width: 100%;
+  }
+}
