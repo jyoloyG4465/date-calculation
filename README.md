@@ -40,7 +40,7 @@ date-calculation/
 ├── docs/                         # ドキュメント
 │   ├── react-migration-guide.md  # React移行ガイド
 │   └── cdk-deploy-plan.md        # AWSデプロイ計画
-├── front-end/                    # 旧実装（HTML/CSS/JS）
+├── img/                          # 画像
 └── README.md
 ```
 
