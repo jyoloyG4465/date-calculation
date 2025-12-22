@@ -44,11 +44,26 @@
 }
 
 @media (max-width: 600px) {
-  .fieldsetWithMenu {
-    flex-direction: column;
+  .yearInput {
+    width: 50px;
+    padding: 6px;
+    font-size: 14px;
+  }
+
+  .select {
+    padding: 6px;
+    font-size: 14px;
+  }
+
+  .inputGroup {
+    gap: 2px;
+  }
+
+  .inputGroup span {
+    font-size: 14px;
   }
 
   .fieldset {
-    width: 100%;
+    padding: 6px 8px;
   }
 }

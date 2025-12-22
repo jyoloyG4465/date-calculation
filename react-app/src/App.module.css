@@ -36,9 +36,18 @@
 
 @media (max-width: 600px) {
   .container {
-    padding: 16px;
+    padding: 12px;
     border-radius: 0;
     border-left: none;
     border-right: none;
+  }
+
+  .title {
+    font-size: 28px;
+    margin-bottom: 12px;
+  }
+
+  .calculateButton {
+    font-size: 16px;
   }
 }
