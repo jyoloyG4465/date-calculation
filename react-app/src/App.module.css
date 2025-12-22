@@ -36,10 +36,9 @@
 
 @media (max-width: 600px) {
   .container {
+    max-width: calc(100% - 24px);
     padding: 12px;
-    border-radius: 0;
-    border-left: none;
-    border-right: none;
+    border-radius: 8px;
   }
 
   .title {
