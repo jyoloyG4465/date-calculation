@@ -45,25 +45,25 @@
 
 @media (max-width: 600px) {
   .yearInput {
-    width: 50px;
+    width: 60px;
     padding: 6px;
-    font-size: 14px;
+    font-size: 16px;
   }
 
   .select {
     padding: 6px;
-    font-size: 14px;
+    font-size: 16px;
   }
 
   .inputGroup {
-    gap: 2px;
+    gap: 6px;
   }
 
   .inputGroup span {
-    font-size: 14px;
+    font-size: 16px;
   }
 
   .fieldset {
-    padding: 6px 8px;
+    padding: 6px 12px;
   }
 }
