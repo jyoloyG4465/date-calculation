@@ -17,6 +17,7 @@ html {
   background-attachment: fixed;
 }
 
+
 @media (max-width: 600px) {
   html {
     background-image: none;
