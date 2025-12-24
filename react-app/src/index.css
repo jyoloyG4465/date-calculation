@@ -17,6 +17,14 @@ html {
   background-attachment: fixed;
 }
 
+/* モバイル: 背景を単色に変更（iOS対応） */
+@media (max-width: 600px) {
+  html {
+    background-image: none;
+    background-color: #d4f4a7;
+  }
+}
+
 body {
   margin: 0;
   padding: 16px 0;
