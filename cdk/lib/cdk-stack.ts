@@ -15,10 +15,9 @@ export class CdkStack extends cdk.Stack {
     const certificateArn = process.env.CERTIFICATE_ARN;
 
     // ACM証明書を参照（カスタムドメイン設定がある場合）
-    const certificate =
-      certificateArn
-        ? acm.Certificate.fromCertificateArn(this, "Certificate", certificateArn)
-        : undefined;
+    const certificate = certificateArn
+      ? acm.Certificate.fromCertificateArn(this, "Certificate", certificateArn)
+      : undefined;
 
     // S3バケット（CloudFront経由のみアクセス可能）
     const bucket = new s3.Bucket(this, "WebsiteBucket", {
@@ -52,9 +51,9 @@ export class CdkStack extends cdk.Stack {
       ],
     });
 
-    // react-app/distをS3にデプロイ
+    // front-end/distをS3にデプロイ
     new s3deploy.BucketDeployment(this, "DeployWebsite", {
-      sources: [s3deploy.Source.asset("../react-app/dist")],
+      sources: [s3deploy.Source.asset("../front-end/dist")],
       destinationBucket: bucket,
       distribution,
       distributionPaths: ["/*"], // デプロイ時にキャッシュ無効化
