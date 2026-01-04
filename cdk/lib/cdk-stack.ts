@@ -1,3 +1,5 @@
+import "dotenv/config";
+
 import * as cdk from "aws-cdk-lib/core";
 import { Construct } from "constructs";
 import * as s3 from "aws-cdk-lib/aws-s3";
