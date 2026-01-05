@@ -1,26 +1,27 @@
-import { useState } from 'react';
-import type { DateValue, CalculationResult } from './types/date';
-import { ToastProvider } from './contexts/ToastContext';
-import { DateField } from './components/DateField';
-import { ResultSection } from './components/ResultSection';
-import { InfoSection } from './components/InfoSection';
-import { Toast } from './components/Toast';
+import { useState } from "react";
+import type { DateValue, CalculateResult } from "./types/date";
+import { ToastProvider } from "./contexts/ToastContext";
+import { DateField } from "./components/DateField";
+import { ResultSection } from "./components/ResultSection";
+import { InfoSection } from "./components/InfoSection";
+import { Toast } from "./components/Toast";
 import {
   calculateDateDifference,
   getInitialStartDate,
   getInitialEndDate,
-} from './utils/dateCalculation';
+} from "./utils/dateCalculation";
 import {
   isValidDate,
   validateYearInput,
   validateDateOrder,
-} from './utils/dateValidation';
-import styles from './App.module.css';
+} from "./utils/dateValidation";
+import styles from "./App.module.css";
 
 function DateCalculator() {
   const [startDate, setStartDate] = useState<DateValue>(getInitialStartDate);
   const [endDate, setEndDate] = useState<DateValue>(getInitialEndDate);
-  const [result, setResult] = useState<CalculationResult | null>(null);
+  const [CalculateResult, setCalculateResult] =
+    useState<CalculateResult | null>(null);
   const [error, setError] = useState<string | null>(null);
 
   const handleCalculate = () => {
@@ -28,19 +29,19 @@ function DateCalculator() {
     const yearError = validateYearInput(startDate.year, endDate.year);
     if (yearError) {
       setError(yearError);
-      setResult(null);
+      setCalculateResult(null);
       return;
     }
 
     // 日付の存在チェック
     if (!isValidDate(startDate.year, startDate.month, startDate.day)) {
-      setError('開始日が不正な日付です。');
-      setResult(null);
+      setError("開始日が不正な日付です。");
+      setCalculateResult(null);
       return;
     }
     if (!isValidDate(endDate.year, endDate.month, endDate.day)) {
-      setError('終了日が不正な日付です。');
-      setResult(null);
+      setError("終了日が不正な日付です。");
+      setCalculateResult(null);
       return;
     }
 
@@ -55,27 +56,21 @@ function DateCalculator() {
         endDate.day
       )
     ) {
-      setError('開始日は終了日より前の日付にしてください。');
-      setResult(null);
+      setError("開始日は終了日より前の日付にしてください。");
+      setCalculateResult(null);
       return;
     }
 
     // 計算実行
     const calcResult = calculateDateDifference(startDate, endDate);
-    setResult(calcResult);
+    setCalculateResult(calcResult);
     setError(null);
   };
 
   return (
     <div className={styles.container}>
-      <h1 className={styles.title}>日数計算ツール</h1>
-      <form
-        className={styles.form}
-        onSubmit={(e) => {
-          e.preventDefault();
-          handleCalculate();
-        }}
-      >
+      <h1 className={styles.subTitle}>日数計算ツール</h1>
+      <div className={styles.form}>
         <DateField
           type="start"
           label="開始日"
@@ -88,11 +83,15 @@ function DateCalculator() {
           value={endDate}
           onChange={setEndDate}
         />
-        <button type="submit" className={styles.calculateButton}>
+        <button
+          type="button"
+          onClick={handleCalculate}
+          className={styles.calculateButton}
+        >
           計算
         </button>
-      </form>
-      <ResultSection result={result} error={error} />
+      </div>
+      <ResultSection result={CalculateResult} error={error} />
       <InfoSection />
       <Toast />
     </div>

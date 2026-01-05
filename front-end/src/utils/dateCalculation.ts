@@ -1,4 +1,4 @@
-import type { CalculationResult, DateValue } from "../types/date";
+import type { CalculateResult, DateValue } from "../types/date";
 
 /**
  * 指定した月の末日を取得する
@@ -79,7 +79,7 @@ function calculateMonthsDifference(
 export function calculateDateDifference(
   start: DateValue,
   end: DateValue
-): CalculationResult {
+): CalculateResult {
   const startDate = new Date(start.year, start.month - 1, start.day);
   const endDate = new Date(end.year, end.month - 1, end.day);
 

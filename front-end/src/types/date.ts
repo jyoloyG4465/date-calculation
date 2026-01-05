@@ -4,7 +4,7 @@ export interface DateValue {
   day: number;
 }
 
-export interface CalculationResult {
+export interface CalculateResult {
   diffDays: number;
   diffWeeks: number;
   remainingWeekDays: number;

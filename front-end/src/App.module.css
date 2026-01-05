@@ -10,7 +10,7 @@
   text-align: center;
 }
 
-.title {
+.subTitle {
   font-size: 36px;
   margin-bottom: 16px;
 }
@@ -41,7 +41,7 @@
     border-radius: 8px;
   }
 
-  .title {
+  .subTitle {
     font-size: 28px;
     margin-bottom: 12px;
   }
