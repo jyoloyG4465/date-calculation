@@ -1,46 +1,44 @@
 import styles from './SettingsMenu.module.css';
 
 interface SettingsMenuProps {
-  type: 'start' | 'end';
   isOpen: boolean;
-  onToggle: () => void;
-  onClose: () => void;
-  onToday?: () => void;
-  onSave: () => void;
-  onLoad: () => void;
+  onToggleMenuClick: () => void;
+  onCloseMenuClick: () => void;
+  onTodayClick?: () => void;
+  onSaveClick: () => void;
+  onLoadClick: () => void;
 }
 
 export function SettingsMenu({
-  type,
   isOpen,
-  onToggle,
-  onClose,
-  onToday,
-  onSave,
-  onLoad,
+  onToggleMenuClick,
+  onCloseMenuClick,
+  onTodayClick,
+  onSaveClick,
+  onLoadClick,
 }: SettingsMenuProps) {
   return (
     <div className={styles.menuWrapper}>
       <button
         type="button"
         className={styles.toggleButton}
-        onClick={onToggle}
+        onClick={onToggleMenuClick}
       >
         ⚙
       </button>
       {isOpen && (
         <>
-          <div className={styles.overlay} onClick={onClose} />
+          <div className={styles.overlay} onClick={onCloseMenuClick} />
           <div className={styles.menu}>
-            {type === 'start' && onToday && (
-              <button type="button" className={styles.menuItem} onClick={onToday}>
+            {onTodayClick && (
+              <button type="button" className={styles.menuItem} onClick={onTodayClick}>
                 今日
               </button>
             )}
-            <button type="button" className={styles.menuItem} onClick={onSave}>
+            <button type="button" className={styles.menuItem} onClick={onSaveClick}>
               保存
             </button>
-            <button type="button" className={styles.menuItem} onClick={onLoad}>
+            <button type="button" className={styles.menuItem} onClick={onLoadClick}>
               呼出
             </button>
           </div>

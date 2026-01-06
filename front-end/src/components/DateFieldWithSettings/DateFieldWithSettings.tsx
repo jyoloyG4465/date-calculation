@@ -48,13 +48,12 @@ export function DateFieldWithSettings({
         onDateChange={onDateChange}
       />
       <SettingsMenu
-        type={type}
         isOpen={isMenuOpen}
-        onToggle={() => setIsMenuOpen(!isMenuOpen)}
-        onClose={() => setIsMenuOpen(false)}
-        onToday={type === 'start' ? handleToday : undefined}
-        onSave={handleSave}
-        onLoad={handleLoad}
+        onToggleMenuClick={() => setIsMenuOpen(!isMenuOpen)}
+        onCloseMenuClick={() => setIsMenuOpen(false)}
+        onTodayClick={type === 'start' ? handleToday : undefined}
+        onSaveClick={handleSave}
+        onLoadClick={handleLoad}
       />
     </div>
   );
