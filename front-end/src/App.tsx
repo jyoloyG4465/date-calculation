@@ -75,13 +75,13 @@ function DateCalculator() {
           type="start"
           label="開始日"
           value={startDate}
-          onChange={setStartDate}
+          onDateChange={setStartDate}
         />
         <DateField
           type="end"
           label="終了日"
           value={endDate}
-          onChange={setEndDate}
+          onDateChange={setEndDate}
         />
         <button
           type="button"

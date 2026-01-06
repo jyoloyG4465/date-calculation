@@ -1,58 +1,53 @@
-import { useState, useMemo } from 'react';
+import { useState } from 'react';
 import type { DateValue } from '../../types/date';
 import { SettingsMenu } from '../SettingsMenu';
 import { useLocalStorage } from '../../hooks/useLocalStorage';
 import { getToday } from '../../utils/dateCalculation';
 import styles from './DateField.module.css';
 
+const MONTHS = Array.from({ length: 12 }, (_, i) => i + 1);
+const DAYS = Array.from({ length: 31 }, (_, i) => i + 1);
+
 interface DateFieldProps {
   type: 'start' | 'end';
   label: string;
   value: DateValue;
-  onChange: (value: DateValue) => void;
+  onDateChange: (value: DateValue) => void;
 }
 
-export function DateField({ type, label, value, onChange }: DateFieldProps) {
+export function DateField({ type, label, value, onDateChange }: DateFieldProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const { save, load } = useLocalStorage(type);
-
-  const months = useMemo(() => {
-    return Array.from({ length: 12 }, (_, i) => i + 1);
-  }, []);
-
-  const days = useMemo(() => {
-    return Array.from({ length: 31 }, (_, i) => i + 1);
-  }, []);
+  const { saveDate, loadDate } = useLocalStorage(type);
 
   const handleYearChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const year = parseInt(e.target.value, 10) || 0;
-    onChange({ ...value, year });
+    onDateChange({ ...value, year });
   };
 
   const handleMonthChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const month = parseInt(e.target.value, 10);
-    onChange({ ...value, month });
+    onDateChange({ ...value, month });
   };
 
   const handleDayChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const day = parseInt(e.target.value, 10);
-    onChange({ ...value, day });
+    onDateChange({ ...value, day });
   };
 
   const handleToday = () => {
-    onChange(getToday());
+    onDateChange(getToday());
     setIsMenuOpen(false);
   };
 
   const handleSave = () => {
-    save(value);
+    saveDate(value);
     setIsMenuOpen(false);
   };
 
   const handleLoad = () => {
-    const loaded = load();
+    const loaded = loadDate();
     if (loaded) {
-      onChange(loaded);
+      onDateChange(loaded);
     }
     setIsMenuOpen(false);
   };
@@ -76,7 +71,7 @@ export function DateField({ type, label, value, onChange }: DateFieldProps) {
               value={value.month}
               onChange={handleMonthChange}
             >
-              {months.map((m) => (
+              {MONTHS.map((m) => (
                 <option key={m} value={m}>
                   {m}
                 </option>
@@ -88,7 +83,7 @@ export function DateField({ type, label, value, onChange }: DateFieldProps) {
               value={value.day}
               onChange={handleDayChange}
             >
-              {days.map((d) => (
+              {DAYS.map((d) => (
                 <option key={d} value={d}>
                   {d}
                 </option>
