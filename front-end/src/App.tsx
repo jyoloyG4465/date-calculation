@@ -1,7 +1,7 @@
 import { useState } from "react";
 import type { DateValue, CalculateResult } from "./types/date";
 import { ToastProvider } from "./contexts/ToastContext";
-import { DateField } from "./components/DateField";
+import { DateFieldWithSettings } from "./components/DateFieldWithSettings";
 import { ResultSection } from "./components/ResultSection";
 import { InfoSection } from "./components/InfoSection";
 import { Toast } from "./components/Toast";
@@ -71,13 +71,13 @@ function DateCalculator() {
     <div className={styles.container}>
       <h1 className={styles.subTitle}>日数計算ツール</h1>
       <div className={styles.inputSection}>
-        <DateField
+        <DateFieldWithSettings
           type="start"
           label="開始日"
           value={startDate}
           onDateChange={setStartDate}
         />
-        <DateField
+        <DateFieldWithSettings
           type="end"
           label="終了日"
           value={endDate}
