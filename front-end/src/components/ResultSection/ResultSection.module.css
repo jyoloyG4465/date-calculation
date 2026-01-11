@@ -9,9 +9,19 @@
   border-bottom: 2px solid #ddd;
 }
 
-.result {
-  margin: 8px 0;
-  font-size: 16px;
+.resultBox {
+  margin-top: 16px;
+  padding: 16px;
+  background: #f0fdf4;
+  border: 1px solid #86efac;
+  border-radius: 8px;
+}
+
+.resultValue {
+  font-size: 24px;
+  font-weight: bold;
+  color: #059669;
+  margin: 0;
 }
 
 .error {
@@ -20,6 +30,12 @@
 }
 
 .placeholder {
-  color: #666;
-  font-size: 14px;
+  color: #9ca3af;
+  font-size: 16px;
+}
+
+@media (max-width: 600px) {
+  .resultValue {
+    font-size: 20px;
+  }
 }

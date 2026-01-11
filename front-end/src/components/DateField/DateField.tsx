@@ -1,16 +1,15 @@
-import type { DateValue } from '../../types/date';
-import styles from './DateField.module.css';
+import type { DateValue } from "@/types/date";
+import styles from "./DateField.module.css";
 
 const MONTHS = Array.from({ length: 12 }, (_, i) => i + 1);
 const DAYS = Array.from({ length: 31 }, (_, i) => i + 1);
 
 interface DateFieldProps {
-  label: string;
   value: DateValue;
   onDateChange: (value: DateValue) => void;
 }
 
-export function DateField({ label, value, onDateChange }: DateFieldProps) {
+export function DateField({ value, onDateChange }: DateFieldProps) {
   const handleYearChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const year = parseInt(e.target.value, 10) || 0;
     onDateChange({ ...value, year });
@@ -27,44 +26,39 @@ export function DateField({ label, value, onDateChange }: DateFieldProps) {
   };
 
   return (
-    <div className={styles.field}>
-      <fieldset className={styles.fieldset}>
-        <legend>{label}</legend>
-        <div className={styles.inputGroup}>
-          <input
-            type="text"
-            className={styles.yearInput}
-            value={value.year || ''}
-            onChange={handleYearChange}
-            maxLength={4}
-          />
-          <span>年</span>
-          <select
-            className={styles.select}
-            value={value.month}
-            onChange={handleMonthChange}
-          >
-            {MONTHS.map((m) => (
-              <option key={m} value={m}>
-                {m}
-              </option>
-            ))}
-          </select>
-          <span>月</span>
-          <select
-            className={styles.select}
-            value={value.day}
-            onChange={handleDayChange}
-          >
-            {DAYS.map((d) => (
-              <option key={d} value={d}>
-                {d}
-              </option>
-            ))}
-          </select>
-          <span>日</span>
-        </div>
-      </fieldset>
+    <div className={styles.inputGroup}>
+      <input
+        type="text"
+        className={styles.yearInput}
+        value={value.year || ""}
+        onChange={handleYearChange}
+        maxLength={4}
+      />
+      <span>年</span>
+      <select
+        className={styles.select}
+        value={value.month}
+        onChange={handleMonthChange}
+      >
+        {MONTHS.map((m) => (
+          <option key={m} value={m}>
+            {m}
+          </option>
+        ))}
+      </select>
+      <span>月</span>
+      <select
+        className={styles.select}
+        value={value.day}
+        onChange={handleDayChange}
+      >
+        {DAYS.map((d) => (
+          <option key={d} value={d}>
+            {d}
+          </option>
+        ))}
+      </select>
+      <span>日</span>
     </div>
   );
 }

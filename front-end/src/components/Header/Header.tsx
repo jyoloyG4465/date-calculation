@@ -1,8 +1,8 @@
 import { useState, useCallback } from "react";
+import { NavLink } from "react-router";
 import {
   AppBar,
   Toolbar,
-  Button,
   IconButton,
   Drawer,
   List,
@@ -16,17 +16,17 @@ import CloseIcon from "@mui/icons-material/Close";
 
 interface MenuItem {
   label: string;
-  href: string;
-  isActive?: boolean;
+  to: string;
 }
+
+const defaultMenuItems: MenuItem[] = [
+  { label: "日数計算", to: "/date-calculation" },
+  { label: "N日後計算", to: "/days-from-today" },
+];
 
 interface HeaderProps {
   menuItems?: MenuItem[];
 }
-
-const defaultMenuItems: MenuItem[] = [
-  { label: "日数計算", href: "#", isActive: true },
-];
 
 export function Header({ menuItems = defaultMenuItems }: HeaderProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -38,6 +38,19 @@ export function Header({ menuItems = defaultMenuItems }: HeaderProps) {
   const closeMenu = useCallback(() => {
     setIsMenuOpen(false);
   }, []);
+
+  const getNavLinkStyle = (isActive: boolean) => ({
+    color: isActive ? "#fff" : "rgba(255, 255, 255, 0.9)",
+    backgroundColor: isActive ? "rgba(255, 255, 255, 0.25)" : "transparent",
+    fontSize: "14px",
+    fontWeight: 500,
+    textTransform: "none" as const,
+    borderRadius: "6px",
+    padding: "8px 16px",
+    textDecoration: "none",
+    display: "inline-block",
+    transition: "background-color 0.2s",
+  });
 
   return (
     <AppBar
@@ -76,28 +89,14 @@ export function Header({ menuItems = defaultMenuItems }: HeaderProps) {
           }}
         >
           {menuItems.map((item) => (
-            <Button
+            <NavLink
               key={item.label}
-              href={item.href}
-              sx={{
-                color: item.isActive ? "#fff" : "rgba(255, 255, 255, 0.9)",
-                backgroundColor: item.isActive
-                  ? "rgba(255, 255, 255, 0.25)"
-                  : "transparent",
-                fontSize: "14px",
-                fontWeight: 500,
-                textTransform: "none",
-                borderRadius: "6px",
-                px: 2,
-                py: 1,
-                "&:hover": {
-                  backgroundColor: "rgba(255, 255, 255, 0.15)",
-                  color: "#fff",
-                },
-              }}
+              to={item.to}
+              style={({ isActive }) => getNavLinkStyle(isActive)}
+              end
             >
               {item.label}
-            </Button>
+            </NavLink>
           ))}
         </Box>
 
@@ -138,16 +137,17 @@ export function Header({ menuItems = defaultMenuItems }: HeaderProps) {
           {menuItems.map((item) => (
             <ListItem key={item.label} disablePadding>
               <ListItemButton
-                component="a"
-                href={item.href}
+                component={NavLink}
+                to={item.to}
+                end
                 onClick={closeMenu}
                 sx={{
                   mx: 2,
                   my: 0.5,
                   borderRadius: "6px",
-                  backgroundColor: item.isActive
-                    ? "rgba(255, 255, 255, 0.2)"
-                    : "transparent",
+                  "&.active": {
+                    backgroundColor: "rgba(255, 255, 255, 0.2)",
+                  },
                   "&:hover": {
                     backgroundColor: "rgba(255, 255, 255, 0.1)",
                   },
@@ -157,9 +157,14 @@ export function Header({ menuItems = defaultMenuItems }: HeaderProps) {
                   primary={item.label}
                   sx={{
                     "& .MuiListItemText-primary": {
-                      color: item.isActive ? "#fff" : "rgba(255, 255, 255, 0.9)",
+                      color: "rgba(255, 255, 255, 0.9)",
                       fontWeight: 500,
                       fontSize: "16px",
+                    },
+                    ".active &": {
+                      "& .MuiListItemText-primary": {
+                        color: "#fff",
+                      },
                     },
                   }}
                 />
