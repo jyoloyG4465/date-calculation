@@ -20,11 +20,12 @@ function isHalfWidthNumeric(value: number): boolean {
 /**
  * 年の入力値をバリデーションする
  */
-export function validateYearInput(startYear: number): string | null {
-  if (isNaN(startYear)) {
+export function validateYearInput(year: number): string | null {
+  console.log(year);
+  if (isNaN(year)) {
     return "年が空欄になっているか、数字ではありません。";
   }
-  if (!isHalfWidthNumeric(startYear) || startYear < 1900) {
+  if (!isHalfWidthNumeric(year) || year < 1900) {
     return "1900以上の数値を設定してください。";
   }
   return null;
