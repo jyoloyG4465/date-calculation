@@ -27,13 +27,19 @@ html {
 
 body {
   margin: 0;
-  padding: 16px 0;
   min-height: 100vh;
 }
 
 #root {
   display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+main {
+  flex: 1;
+  display: flex;
   justify-content: center;
   align-items: flex-start;
-  min-height: 100vh;
+  padding: 16px 0;
 }

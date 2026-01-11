@@ -1,6 +1,7 @@
 import { useState } from "react";
 import type { DateValue, CalculateResult } from "./types/date";
 import { ToastProvider } from "./contexts/ToastContext";
+import { Header } from "./components/Header";
 import { DateFieldWithSettings } from "./components/DateFieldWithSettings";
 import { ResultSection } from "./components/ResultSection";
 import { InfoSection } from "./components/InfoSection";
@@ -101,7 +102,10 @@ function DateCalculator() {
 function App() {
   return (
     <ToastProvider>
-      <DateCalculator />
+      <Header />
+      <main>
+        <DateCalculator />
+      </main>
     </ToastProvider>
   );
 }

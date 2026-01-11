@@ -1,6 +1,6 @@
 .toast {
   position: fixed;
-  top: 20px;
+  top: 72px;
   left: 50%;
   transform: translateX(-50%);
   background-color: #333;
@@ -9,4 +9,10 @@
   border-radius: 8px;
   z-index: 1000;
   font-size: 14px;
+}
+
+@media (max-width: 600px) {
+  .toast {
+    top: 64px;
+  }
 }
