@@ -20,7 +20,7 @@ interface MenuItem {
 }
 
 const defaultMenuItems: MenuItem[] = [
-  { label: "日数計算", to: "/date-calculation" },
+  { label: "日数差計算", to: "/date-calculation" },
   { label: "N日後計算", to: "/date-after-days" },
   { label: "このサイトについて", to: "/about" },
 ];

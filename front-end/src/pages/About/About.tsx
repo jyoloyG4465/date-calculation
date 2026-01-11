@@ -9,10 +9,12 @@ export function About() {
         <h2>機能紹介</h2>
         <ul className={styles.list}>
           <li>
-            <strong>日数計算</strong>：2つの日付間の日数差を計算します。日数、週数、月数で結果を表示します。
+            <strong>日数差計算</strong>
+            ：2つの日付間の日数差を計算します。日数、週数、月数で結果を表示します。
           </li>
           <li>
-            <strong>N日後計算</strong>：指定した日付からN日後の日付を計算します。
+            <strong>N日後計算</strong>
+            ：指定した日付からN日後の日付を計算します。
           </li>
         </ul>
       </section>
