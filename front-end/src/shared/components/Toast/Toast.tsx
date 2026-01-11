@@ -1,5 +1,5 @@
-import { useToast } from '../../contexts/ToastContext';
-import styles from './Toast.module.css';
+import { useToast } from "@/contexts/ToastContext";
+import styles from "./Toast.module.css";
 
 export function Toast() {
   const { message } = useToast();

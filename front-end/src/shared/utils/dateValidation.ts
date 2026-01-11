@@ -20,20 +20,13 @@ function isHalfWidthNumeric(value: number): boolean {
 /**
  * 年の入力値をバリデーションする
  */
-export function validateYearInput(
-  startYear: number,
-  endYear: number
-): string | null {
-  if (isNaN(startYear) || isNaN(endYear)) {
-    return '年が空欄になっているか、数字ではありません。';
+export function validateYearInput(year: number): string | null {
+  console.log(year);
+  if (isNaN(year)) {
+    return "年が空欄になっているか、数字ではありません。";
   }
-  if (
-    !isHalfWidthNumeric(startYear) ||
-    startYear < 1900 ||
-    !isHalfWidthNumeric(endYear) ||
-    endYear < 1900
-  ) {
-    return '1900以上の数値を設定してください。';
+  if (!isHalfWidthNumeric(year) || year < 1900) {
+    return "1900以上の数値を設定してください。";
   }
   return null;
 }
@@ -52,4 +45,22 @@ export function validateDateOrder(
   const startDate = new Date(startYear, startMonth - 1, startDay);
   const endDate = new Date(endYear, endMonth - 1, endDay);
   return startDate <= endDate;
+}
+
+/**
+ * 日数入力のバリデーション
+ * @returns エラーメッセージ（正常な場合はnull）
+ */
+export function validateIntegerDaysInput(value: string): string | null {
+  const num = parseFloat(value);
+
+  if (isNaN(num)) {
+    return "数値を入力してください";
+  }
+
+  if (!Number.isInteger(num)) {
+    return "整数を入力してください";
+  }
+
+  return null;
 }

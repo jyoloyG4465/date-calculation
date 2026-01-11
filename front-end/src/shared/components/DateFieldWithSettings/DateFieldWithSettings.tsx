@@ -1,13 +1,13 @@
-import { useState } from 'react';
-import type { DateValue } from '../../types/date';
-import { DateField } from '../DateField';
-import { SettingsMenu } from '../SettingsMenu';
-import { useLocalStorage } from '../../hooks/useLocalStorage';
-import { getToday } from '../../utils/dateCalculation';
-import styles from './DateFieldWithSettings.module.css';
+import { useState } from "react";
+import type { DateValue } from "@/types/date";
+import { DateFieldWithLabel } from "@/shared/components/DateFieldWithLabel";
+import { SettingsMenu } from "@/shared/components/SettingsMenu";
+import { useLocalStorage } from "@/hooks/useLocalStorage";
+import { getToday } from "@/shared/utils/dateCalculation";
+import styles from "./DateFieldWithSettings.module.css";
 
 interface DateFieldWithSettingsProps {
-  type: 'start' | 'end';
+  type: "start" | "end";
   label: string;
   value: DateValue;
   onDateChange: (value: DateValue) => void;
@@ -17,7 +17,7 @@ export function DateFieldWithSettings({
   type,
   label,
   value,
-  onDateChange
+  onDateChange,
 }: DateFieldWithSettingsProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { saveDate, loadDate } = useLocalStorage(type);
@@ -42,7 +42,7 @@ export function DateFieldWithSettings({
 
   return (
     <div className={styles.container}>
-      <DateField
+      <DateFieldWithLabel
         label={label}
         value={value}
         onDateChange={onDateChange}
@@ -51,7 +51,7 @@ export function DateFieldWithSettings({
         isOpen={isMenuOpen}
         onToggleMenuClick={() => setIsMenuOpen(!isMenuOpen)}
         onCloseMenuClick={() => setIsMenuOpen(false)}
-        onTodayClick={type === 'start' ? handleToday : undefined}
+        onTodayClick={type === "start" ? handleToday : undefined}
         onSaveClick={handleSave}
         onLoadClick={handleLoad}
       />

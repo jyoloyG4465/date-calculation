@@ -1,4 +1,4 @@
-import type { CalculateResult, DateValue } from "../types/date";
+import type { CalculateResult, DateValue } from "@/types/date";
 
 /**
  * 指定した月の末日を取得する
@@ -103,6 +103,42 @@ export function calculateDateDifference(
     remainingWeekDays,
     diffMonths,
     remainingMonthDays,
+  };
+}
+
+/**
+ * N日後の日付計算結果
+ */
+export interface DateAfterDaysResult {
+  year: number;
+  month: number;
+  day: number;
+  weekday: string;
+  formatted: string;
+}
+
+/**
+ * 基準日からN日後の日付を計算する
+ */
+export function calculateDateAfterDays(
+  baseDate: DateValue,
+  days: number
+): DateAfterDaysResult {
+  const date = new Date(baseDate.year, baseDate.month - 1, baseDate.day);
+  date.setDate(date.getDate() + days);
+
+  const year = date.getFullYear();
+  const month = date.getMonth() + 1;
+  const day = date.getDate();
+  const weekdays = ["日", "月", "火", "水", "木", "金", "土"];
+  const weekday = weekdays[date.getDay()];
+
+  return {
+    year,
+    month,
+    day,
+    weekday,
+    formatted: `${year}年${month}月${day}日（${weekday}）`,
   };
 }
 

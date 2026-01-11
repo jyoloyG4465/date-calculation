@@ -1,0 +1,41 @@
+.section {
+  margin-top: 24px;
+}
+
+.section h2 {
+  font-size: 24px;
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid #ddd;
+}
+
+.resultBox {
+  margin-top: 16px;
+  padding: 16px;
+  background: #f0fdf4;
+  border: 1px solid #86efac;
+  border-radius: 8px;
+}
+
+.resultValue {
+  font-size: 24px;
+  font-weight: bold;
+  color: #059669;
+  margin: 0;
+}
+
+.error {
+  color: red;
+  font-size: 16px;
+}
+
+.placeholder {
+  color: #9ca3af;
+  font-size: 16px;
+}
+
+@media (max-width: 700px) {
+  .resultValue {
+    font-size: 20px;
+  }
+}

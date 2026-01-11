@@ -1,6 +1,6 @@
 import { useCallback } from "react";
-import { useToast } from "../contexts/ToastContext";
-import type { DateValue } from "../types/date";
+import { useToast } from "@/contexts/ToastContext";
+import type { DateValue } from "@/types/date";
 
 const STORAGE_KEYS = {
   start: "startDay",
