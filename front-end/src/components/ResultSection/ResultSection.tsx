@@ -1,4 +1,4 @@
-import type { CalculateResult } from "../../types/date";
+import type { CalculateResult } from "@/types/date";
 import styles from "./ResultSection.module.css";
 
 interface ResultSectionProps {
@@ -14,14 +14,21 @@ export function ResultSection({ result, error }: ResultSectionProps) {
         <p className={styles.error}>{error}</p>
       ) : result ? (
         <>
-          <p className={styles.result}>日数差： {result.diffDays} 日です。</p>
-          <p className={styles.result}>
-            週数差： {result.diffWeeks} 週と {result.remainingWeekDays} 日です。
-          </p>
-          <p className={styles.result}>
-            月数差： {result.diffMonths} ヶ月と {result.remainingMonthDays}{" "}
-            日です。
-          </p>
+          <div className={styles.resultBox}>
+            <p className={styles.resultValue}>
+              日数差： {result.diffDays} 日
+            </p>
+          </div>
+          <div className={styles.resultBox}>
+            <p className={styles.resultValue}>
+              週数差： {result.diffWeeks} 週と {result.remainingWeekDays} 日
+            </p>
+          </div>
+          <div className={styles.resultBox}>
+            <p className={styles.resultValue}>
+              月数差： {result.diffMonths} ヶ月と {result.remainingMonthDays} 日
+            </p>
+          </div>
         </>
       ) : (
         <p className={styles.placeholder}>計算ボタンを押してください</p>
