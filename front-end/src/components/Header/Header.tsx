@@ -21,7 +21,7 @@ interface MenuItem {
 
 const defaultMenuItems: MenuItem[] = [
   { label: "日数計算", to: "/date-calculation" },
-  { label: "N日後計算", to: "/days-from-today" },
+  { label: "N日後計算", to: "/date-after-days" },
 ];
 
 interface HeaderProps {

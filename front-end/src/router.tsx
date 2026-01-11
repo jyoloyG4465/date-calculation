@@ -1,7 +1,7 @@
 import { createBrowserRouter, Navigate } from "react-router";
 import App from "@/App";
 import { DateCalculation } from "@/pages/DateCalculation";
-import { DaysFromToday } from "@/pages/DaysFromToday";
+import { DateAfterDays } from "@/pages/DateAfterDays";
 
 export const router = createBrowserRouter([
   {
@@ -17,8 +17,8 @@ export const router = createBrowserRouter([
         element: <DateCalculation />,
       },
       {
-        path: "days-from-today",
-        element: <DaysFromToday />,
+        path: "date-after-days",
+        element: <DateAfterDays />,
       },
     ],
   },

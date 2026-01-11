@@ -2,11 +2,11 @@ import { useState } from "react";
 import type { DateValue } from "@/types/date";
 import { DateField } from "@/components/DateField";
 import { getToday } from "@/utils/dateCalculation";
-import styles from "./DaysFromToday.module.css";
+import styles from "./DateAfterDays.module.css";
 
-export function DaysFromToday() {
+export function DateAfterDays() {
   const [baseDate, setBaseDate] = useState<DateValue>(getToday);
-  const [days, setDays] = useState<string>("");
+  const [days, setDays] = useState<string>("1");
   const [resultDate, setResultDate] = useState<string | null>(null);
 
   const handleCalculate = () => {
