@@ -93,6 +93,12 @@
   font-size: 16px;
 }
 
+.error {
+  color: #dc2626;
+  font-size: 16px;
+  margin: 0;
+}
+
 @media (max-width: 700px) {
   .container {
     max-width: calc(100% - 24px);

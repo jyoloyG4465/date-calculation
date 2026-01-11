@@ -1,31 +1,31 @@
 import { useState } from "react";
 import type { DateValue } from "@/types/date";
 import { DateField } from "@/shared/components/DateField";
-import { getToday } from "@/utils/dateCalculation";
+import {
+  getToday,
+  calculateDateAfterDays,
+} from "@/shared/utils/dateCalculation";
+import { validateIntegerDaysInput } from "@/shared/utils/dateValidation";
 import styles from "./DateAfterDays.module.css";
 
 export function DateAfterDays() {
   const [baseDate, setBaseDate] = useState<DateValue>(getToday);
   const [days, setDays] = useState<string>("1");
   const [resultDate, setResultDate] = useState<string | null>(null);
+  const [error, setError] = useState<string | null>(null);
 
   const handleCalculate = () => {
-    const daysNum = parseInt(days, 10);
-    if (isNaN(daysNum)) {
+    const validationError = validateIntegerDaysInput(days);
+    if (validationError) {
+      setError(validationError);
       setResultDate(null);
       return;
     }
 
-    const date = new Date(baseDate.year, baseDate.month - 1, baseDate.day);
-    date.setDate(date.getDate() + daysNum);
-
-    const year = date.getFullYear();
-    const month = date.getMonth() + 1;
-    const day = date.getDate();
-    const weekdays = ["日", "月", "火", "水", "木", "金", "土"];
-    const weekday = weekdays[date.getDay()];
-
-    setResultDate(`${year}年${month}月${day}日（${weekday}）`);
+    setError(null);
+    const daysNum = parseInt(days, 10);
+    const result = calculateDateAfterDays(baseDate, daysNum);
+    setResultDate(result.formatted);
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -61,7 +61,9 @@ export function DateAfterDays() {
       </div>
       <section className={styles.resultSection}>
         <h2>結果</h2>
-        {resultDate ? (
+        {error ? (
+          <p className={styles.error}>{error}</p>
+        ) : resultDate ? (
           <div className={styles.resultBox}>
             <p className={styles.resultDate}>{resultDate}</p>
           </div>

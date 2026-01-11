@@ -1,6 +1,7 @@
 import { describe, test, expect } from "vitest";
 import {
   calculateDateDifference,
+  calculateDateAfterDays,
   getToday,
   getInitialStartDate,
   getInitialEndDate,
@@ -151,5 +152,80 @@ describe("getInitialEndDate", () => {
       expect(end.year).toBe(now.getFullYear());
       expect(end.month).toBe(currentMonth + 1);
     }
+  });
+});
+
+describe("calculateDateAfterDays", () => {
+  test("基準日から1日後", () => {
+    const result = calculateDateAfterDays(
+      { year: 2025, month: 1, day: 1 },
+      1
+    );
+    expect(result.year).toBe(2025);
+    expect(result.month).toBe(1);
+    expect(result.day).toBe(2);
+    expect(result.weekday).toBe("木");
+    expect(result.formatted).toBe("2025年1月2日（木）");
+  });
+
+  test("基準日から30日後", () => {
+    const result = calculateDateAfterDays(
+      { year: 2025, month: 1, day: 1 },
+      30
+    );
+    expect(result.year).toBe(2025);
+    expect(result.month).toBe(1);
+    expect(result.day).toBe(31);
+    expect(result.formatted).toBe("2025年1月31日（金）");
+  });
+
+  test("月をまたぐ場合", () => {
+    const result = calculateDateAfterDays(
+      { year: 2025, month: 1, day: 31 },
+      1
+    );
+    expect(result.year).toBe(2025);
+    expect(result.month).toBe(2);
+    expect(result.day).toBe(1);
+  });
+
+  test("年をまたぐ場合", () => {
+    const result = calculateDateAfterDays(
+      { year: 2025, month: 12, day: 31 },
+      1
+    );
+    expect(result.year).toBe(2026);
+    expect(result.month).toBe(1);
+    expect(result.day).toBe(1);
+  });
+
+  test("負の日数（N日前）", () => {
+    const result = calculateDateAfterDays(
+      { year: 2025, month: 1, day: 10 },
+      -5
+    );
+    expect(result.year).toBe(2025);
+    expect(result.month).toBe(1);
+    expect(result.day).toBe(5);
+  });
+
+  test("閏年の2月末から1日後", () => {
+    const result = calculateDateAfterDays(
+      { year: 2024, month: 2, day: 28 },
+      1
+    );
+    expect(result.year).toBe(2024);
+    expect(result.month).toBe(2);
+    expect(result.day).toBe(29);
+  });
+
+  test("閏年の2月29日から1日後", () => {
+    const result = calculateDateAfterDays(
+      { year: 2024, month: 2, day: 29 },
+      1
+    );
+    expect(result.year).toBe(2024);
+    expect(result.month).toBe(3);
+    expect(result.day).toBe(1);
   });
 });

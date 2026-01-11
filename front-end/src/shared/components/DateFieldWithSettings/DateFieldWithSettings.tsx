@@ -3,7 +3,7 @@ import type { DateValue } from "@/types/date";
 import { DateFieldWithLabel } from "@/shared/components/DateFieldWithLabel";
 import { SettingsMenu } from "@/shared/components/SettingsMenu";
 import { useLocalStorage } from "@/hooks/useLocalStorage";
-import { getToday } from "@/utils/dateCalculation";
+import { getToday } from "@/shared/utils/dateCalculation";
 import styles from "./DateFieldWithSettings.module.css";
 
 interface DateFieldWithSettingsProps {

@@ -7,12 +7,12 @@ import {
   calculateDateDifference,
   getInitialStartDate,
   getInitialEndDate,
-} from "@/utils/dateCalculation";
+} from "@/shared/utils/dateCalculation";
 import {
   isValidDate,
   validateYearInput,
   validateDateOrder,
-} from "@/utils/dateValidation";
+} from "@/shared/utils/dateValidation";
 import styles from "./DateCalculation.module.css";
 
 export function DateCalculation() {
