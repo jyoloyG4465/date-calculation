@@ -25,21 +25,17 @@ describe("isValidDate", () => {
 
 describe("validateYearInput", () => {
   test("有効な年はnullを返す", () => {
-    expect(validateYearInput(2025, 2025)).toBeNull();
-    expect(validateYearInput(1900, 2100)).toBeNull();
+    expect(validateYearInput(2025)).toBeNull();
+    expect(validateYearInput(1900)).toBeNull();
   });
 
   test("1900未満の年はエラーメッセージを返す", () => {
-    expect(validateYearInput(1899, 2025)).toBe(
-      "1900以上の数値を設定してください。"
-    );
-    expect(validateYearInput(2025, 1800)).toBe(
-      "1900以上の数値を設定してください。"
-    );
+    expect(validateYearInput(1899)).toBe("1900以上の数値を設定してください。");
+    expect(validateYearInput(1800)).toBe("1900以上の数値を設定してください。");
   });
 
   test("NaNはエラーメッセージを返す", () => {
-    expect(validateYearInput(NaN, 2025)).toBe(
+    expect(validateYearInput(NaN)).toBe(
       "年が空欄になっているか、数字ではありません。"
     );
   });

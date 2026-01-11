@@ -5,7 +5,11 @@ import {
   getToday,
   calculateDateAfterDays,
 } from "@/shared/utils/dateCalculation";
-import { validateIntegerDaysInput } from "@/shared/utils/dateValidation";
+import {
+  isValidDate,
+  validateIntegerDaysInput,
+  validateYearInput,
+} from "@/shared/utils/dateValidation";
 import styles from "./DateAfterDays.module.css";
 
 export function DateAfterDays() {
@@ -15,6 +19,26 @@ export function DateAfterDays() {
   const [error, setError] = useState<string | null>(null);
 
   const handleCalculate = () => {
+    // 年のバリデーション
+    const yearError = validateYearInput(baseDate.year);
+    if (yearError) {
+      setError(yearError);
+      setResultDate(null);
+      return;
+    }
+
+    // 日付の存在チェック
+    if (!isValidDate(baseDate.year, baseDate.month, baseDate.day)) {
+      setError("開始日が不正な日付です。");
+      setResultDate(null);
+      return;
+    }
+    if (!isValidDate(baseDate.year, baseDate.month, baseDate.day)) {
+      setError("終了日が不正な日付です。");
+      setResultDate(null);
+      return;
+    }
+
     const validationError = validateIntegerDaysInput(days);
     if (validationError) {
       setError(validationError);

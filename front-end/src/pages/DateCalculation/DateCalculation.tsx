@@ -24,9 +24,10 @@ export function DateCalculation() {
 
   const handleCalculate = () => {
     // 年のバリデーション
-    const yearError = validateYearInput(startDate.year, endDate.year);
-    if (yearError) {
-      setError(yearError);
+    const startYearError = validateYearInput(startDate.year);
+    const endYearError = validateYearInput(endDate.year);
+    if (startYearError || endYearError) {
+      setError(startYearError || endYearError);
       setCalculateResult(null);
       return;
     }
