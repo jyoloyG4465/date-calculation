@@ -1,6 +1,6 @@
 import { Outlet } from "react-router";
 import { ToastProvider } from "@/contexts/ToastContext";
-import { Header } from "@/components/Header";
+import { Header } from "@/shared/components/Header";
 
 function App() {
   return (

@@ -1,5 +1,5 @@
 import type { DateValue } from "@/types/date";
-import { DateField } from "@/components/DateField";
+import { DateField } from "@/shared/components/DateField";
 import styles from "./DateFieldWithLabel.module.css";
 
 interface DateFieldWithLabelProps {

@@ -1,9 +1,8 @@
 import { useState } from "react";
 import type { DateValue, CalculateResult } from "@/types/date";
-import { DateFieldWithSettings } from "@/components/DateFieldWithSettings";
-import { ResultSection } from "@/components/ResultSection";
-import { InfoSection } from "@/components/InfoSection";
-import { Toast } from "@/components/Toast";
+import { DateFieldWithSettings } from "@/shared/components/DateFieldWithSettings";
+import { ResultSection } from "@/pages/DateCalculation/ResultSection";
+import { Toast } from "@/shared/components/Toast";
 import {
   calculateDateDifference,
   getInitialStartDate,
@@ -91,7 +90,6 @@ export function DateCalculation() {
         </button>
       </div>
       <ResultSection result={calculateResult} error={error} />
-      <InfoSection />
       <Toast />
     </div>
   );

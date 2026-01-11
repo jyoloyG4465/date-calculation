@@ -21,7 +21,7 @@
   border-radius: 4px;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 700px) {
   .yearInput {
     width: 56px;
     padding: 6px;

@@ -22,11 +22,15 @@ interface MenuItem {
 const defaultMenuItems: MenuItem[] = [
   { label: "日数計算", to: "/date-calculation" },
   { label: "N日後計算", to: "/date-after-days" },
+  { label: "このサイトについて", to: "/about" },
 ];
 
 interface HeaderProps {
   menuItems?: MenuItem[];
 }
+
+// カスタムブレークポイント: 700px
+const BREAKPOINT = 700;
 
 export function Header({ menuItems = defaultMenuItems }: HeaderProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -56,7 +60,8 @@ export function Header({ menuItems = defaultMenuItems }: HeaderProps) {
     <AppBar
       position="sticky"
       sx={{
-        background: "linear-gradient(135deg, #059669 0%, #10b981 50%, #34d399 100%)",
+        background:
+          "linear-gradient(135deg, #444444 0%, #444444 50%, #444444 100%)",
         boxShadow: "0 2px 8px rgba(0, 0, 0, 0.15)",
       }}
     >
@@ -64,14 +69,20 @@ export function Header({ menuItems = defaultMenuItems }: HeaderProps) {
         sx={{
           justifyContent: "flex-start",
           gap: "48px",
-          minHeight: { xs: 48, sm: 56 },
+          minHeight: 48,
+          [`@media (min-width: ${BREAKPOINT}px)`]: {
+            minHeight: 56,
+          },
           px: 2,
         }}
       >
         <Box
           component="span"
           sx={{
-            fontSize: { xs: "16px", sm: "20px" },
+            fontSize: "16px",
+            [`@media (min-width: ${BREAKPOINT}px)`]: {
+              fontSize: "20px",
+            },
             fontWeight: 700,
             color: "#fff",
             letterSpacing: "0.5px",
@@ -84,7 +95,10 @@ export function Header({ menuItems = defaultMenuItems }: HeaderProps) {
         <Box
           component="nav"
           sx={{
-            display: { xs: "none", sm: "flex" },
+            display: "none",
+            [`@media (min-width: ${BREAKPOINT}px)`]: {
+              display: "flex",
+            },
             gap: 1,
           }}
         >
@@ -110,7 +124,10 @@ export function Header({ menuItems = defaultMenuItems }: HeaderProps) {
           aria-label={isMenuOpen ? "メニューを閉じる" : "メニューを開く"}
           onClick={toggleMenu}
           sx={{
-            display: { xs: "flex", sm: "none" },
+            display: "flex",
+            [`@media (min-width: ${BREAKPOINT}px)`]: {
+              display: "none",
+            },
             "&:hover": {
               backgroundColor: "rgba(255, 255, 255, 0.15)",
             },
@@ -126,10 +143,12 @@ export function Header({ menuItems = defaultMenuItems }: HeaderProps) {
         open={isMenuOpen}
         onClose={closeMenu}
         sx={{
-          display: { xs: "block", sm: "none" },
+          [`@media (min-width: ${BREAKPOINT}px)`]: {
+            display: "none",
+          },
           "& .MuiDrawer-paper": {
             top: 48,
-            background: "linear-gradient(135deg, #047857 0%, #059669 100%)",
+            background: "linear-gradient(135deg, #333333 0%, #444444 100%)",
           },
         }}
       >

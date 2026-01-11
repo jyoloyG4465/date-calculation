@@ -34,7 +34,7 @@
   background: #0056b3;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 700px) {
   .container {
     max-width: calc(100% - 24px);
     padding: 12px;
