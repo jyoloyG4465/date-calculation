@@ -79,10 +79,7 @@ export function Header({ menuItems = defaultMenuItems }: HeaderProps) {
         <Box
           component="span"
           sx={{
-            fontSize: "16px",
-            [`@media (min-width: ${BREAKPOINT}px)`]: {
-              fontSize: "20px",
-            },
+            fontSize: "20px",
             fontWeight: 700,
             color: "#fff",
             letterSpacing: "0.5px",
