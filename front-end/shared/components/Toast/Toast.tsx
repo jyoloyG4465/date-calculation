@@ -1,6 +1,6 @@
 "use client";
 
-import { useToast } from "@/contexts/ToastContext";
+import { useToast } from "@/shared/contexts/ToastContext";
 import styles from "./Toast.module.css";
 
 export function Toast() {

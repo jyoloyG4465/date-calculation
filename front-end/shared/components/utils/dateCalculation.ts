@@ -1,4 +1,4 @@
-import type { CalculateResult, DateValue } from "@/types/date";
+import type { CalculateResult, DateValue } from "@/shared/types/date";
 
 /**
  * 指定した月の末日を取得する

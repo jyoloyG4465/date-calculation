@@ -1,20 +1,20 @@
 "use client";
 
 import { useState } from "react";
-import type { DateValue, CalculateResult } from "@/types/date";
-import { DateFieldWithSettings } from "@/components/DateFieldWithSettings";
-import { ResultSection } from "@/components/ResultSection";
-import { Toast } from "@/components/Toast";
+import type { DateValue, CalculateResult } from "@/shared/types/date";
+import { DateFieldWithSettings } from "@/shared/components/DateFieldWithSettings";
+import { ResultSection } from "@/shared/components/ResultSection";
+import { Toast } from "@/shared/components/Toast";
 import {
   calculateDateDifference,
   getInitialStartDate,
   getInitialEndDate,
-} from "@/utils/dateCalculation";
+} from "@/shared/components/utils/dateCalculation";
 import {
   isValidDate,
   validateYearInput,
   validateDateOrder,
-} from "@/utils/dateValidation";
+} from "@/shared/components/utils/dateValidation";
 import styles from "./DateCalculation.module.css";
 
 export default function DateCalculation() {

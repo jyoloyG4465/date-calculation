@@ -1,4 +1,4 @@
-import type { CalculateResult } from "@/types/date";
+import type { CalculateResult } from "@/shared/types/date";
 import styles from "./ResultSection.module.css";
 
 interface ResultSectionProps {
@@ -15,9 +15,7 @@ export function ResultSection({ result, error }: ResultSectionProps) {
       ) : result ? (
         <>
           <div className={styles.resultBox}>
-            <p className={styles.resultValue}>
-              日数差： {result.diffDays} 日
-            </p>
+            <p className={styles.resultValue}>日数差： {result.diffDays} 日</p>
           </div>
           <div className={styles.resultBox}>
             <p className={styles.resultValue}>

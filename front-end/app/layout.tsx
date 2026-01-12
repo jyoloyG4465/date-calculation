@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v15-appRouter";
 import { ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
-import { ToastProvider } from "@/contexts/ToastContext";
-import { Header } from "@/components/Header";
+import { ToastProvider } from "@/shared/contexts/ToastContext";
+import { Header } from "@/shared/components/Header";
 import theme from "@/lib/theme";
 import "./globals.css";
 

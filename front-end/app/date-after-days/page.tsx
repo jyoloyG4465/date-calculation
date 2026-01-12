@@ -1,17 +1,17 @@
 "use client";
 
 import { useState } from "react";
-import type { DateValue } from "@/types/date";
-import { DateField } from "@/components/DateField";
+import type { DateValue } from "@/shared/types/date";
+import { DateField } from "@/shared/components/DateField";
 import {
   getToday,
   calculateDateAfterDays,
-} from "@/utils/dateCalculation";
+} from "@/shared/components/utils/dateCalculation";
 import {
   isValidDate,
   validateIntegerDaysInput,
   validateYearInput,
-} from "@/utils/dateValidation";
+} from "@/shared/components/utils/dateValidation";
 import styles from "./DateAfterDays.module.css";
 
 export default function DateAfterDays() {

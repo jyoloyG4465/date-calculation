@@ -1,11 +1,11 @@
 "use client";
 
 import { useState } from "react";
-import type { DateValue } from "@/types/date";
-import { DateFieldWithLabel } from "@/components/DateFieldWithLabel";
-import { SettingsMenu } from "@/components/SettingsMenu";
-import { useLocalStorage } from "@/hooks/useLocalStorage";
-import { getToday } from "@/utils/dateCalculation";
+import type { DateValue } from "@/shared/types/date";
+import { DateFieldWithLabel } from "@/shared/components/DateFieldWithLabel";
+import { SettingsMenu } from "@/shared/components/SettingsMenu";
+import { useLocalStorage } from "@/shared/hooks/useLocalStorage";
+import { getToday } from "@/shared/components/utils/dateCalculation";
 import styles from "./DateFieldWithSettings.module.css";
 
 interface DateFieldWithSettingsProps {

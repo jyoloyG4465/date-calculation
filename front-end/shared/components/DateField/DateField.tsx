@@ -1,6 +1,6 @@
 "use client";
 
-import type { DateValue } from "@/types/date";
+import type { DateValue } from "@/shared/types/date";
 import styles from "./DateField.module.css";
 
 const MONTHS = Array.from({ length: 12 }, (_, i) => i + 1);
