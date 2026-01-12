@@ -33,15 +33,27 @@ export function SettingsMenu({
           <div className={styles.overlay} onClick={onCloseMenuClick} />
           <div className={styles.menu}>
             {onTodayClick && (
-              <button type="button" className={styles.menuItem} onClick={onTodayClick}>
+              <button
+                type="button"
+                className={styles.menuItem}
+                onClick={onTodayClick}
+              >
                 今日
               </button>
             )}
-            <button type="button" className={styles.menuItem} onClick={onSaveClick}>
-              保存
+            <button
+              type="button"
+              className={styles.menuItem}
+              onClick={onSaveClick}
+            >
+              日付保存
             </button>
-            <button type="button" className={styles.menuItem} onClick={onLoadClick}>
-              呼出
+            <button
+              type="button"
+              className={styles.menuItem}
+              onClick={onLoadClick}
+            >
+              日付呼出
             </button>
           </div>
         </>
