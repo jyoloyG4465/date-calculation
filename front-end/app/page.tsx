@@ -1,7 +1,8 @@
 import styles from "./Home.module.css";
 import Link from "next/link";
+import { CommentSection } from "@/shared/components/Comments";
 
-export default function Home() {
+export default async function Home() {
   return (
     <div className={styles.container}>
       <h1 className={styles.title}>このサイトについて</h1>
@@ -44,6 +45,8 @@ export default function Home() {
           </li>
         </ul>
       </section>
+
+      <CommentSection pagePath="/" />
     </div>
   );
 }
