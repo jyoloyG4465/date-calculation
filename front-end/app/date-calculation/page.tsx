@@ -66,7 +66,7 @@ export default function DateCalculation() {
 
   return (
     <div className={styles.container}>
-      <h1 className={styles.subTitle}>日数差計算</h1>
+      <h1 className={styles.title}>日数差計算</h1>
       <div className={styles.inputSection}>
         <DateFieldWithSettings
           type="start"

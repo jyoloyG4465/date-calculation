@@ -55,7 +55,7 @@ export default function DateAfterDays() {
 
   return (
     <div className={styles.container}>
-      <h1 className={styles.subTitle}>N日後計算</h1>
+      <h1 className={styles.title}>N日後計算</h1>
       <div className={styles.inputSection}>
         <DateField value={baseDate} onDateChange={setBaseDate} />
         <div className={styles.inputGroup}>

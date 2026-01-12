@@ -2,7 +2,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 4px;
+  gap: 8px;
 }
 
 .yearInput {
@@ -34,7 +34,7 @@
   }
 
   .inputGroup {
-    gap: 6px;
+    gap: 8px;
   }
 
   .inputGroup span {
