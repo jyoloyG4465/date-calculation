@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import type { DateValue, CalculateResult } from "@/shared/types/date";
 import { DateFieldWithSettings } from "@/shared/components/DateFieldWithSettings";
 import { ResultSection } from "@/shared/components/ResultSection";
@@ -20,9 +20,16 @@ import styles from "./DateCalculation.module.css";
 export default function DateCalculation() {
   const [startDate, setStartDate] = useState<DateValue>(getInitialStartDate);
   const [endDate, setEndDate] = useState<DateValue>(getInitialEndDate);
+  const [initialized, setInitialized] = useState(false);
   const [calculateResult, setCalculateResult] =
     useState<CalculateResult | null>(null);
   const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    setStartDate(getInitialStartDate());
+    setEndDate(getInitialEndDate());
+    setInitialized(true);
+  }, []);
 
   const handleCalculate = () => {
     const startYearError = validateYearInput(startDate.year);
@@ -68,18 +75,22 @@ export default function DateCalculation() {
     <div className={styles.container}>
       <h1 className={styles.title}>日数差計算</h1>
       <div className={styles.inputSection}>
-        <DateFieldWithSettings
-          type="start"
-          label="開始日"
-          value={startDate}
-          onDateChange={setStartDate}
-        />
-        <DateFieldWithSettings
-          type="end"
-          label="終了日"
-          value={endDate}
-          onDateChange={setEndDate}
-        />
+        {initialized && (
+          <>
+            <DateFieldWithSettings
+              type="start"
+              label="開始日"
+              value={startDate}
+              onDateChange={setStartDate}
+            />
+            <DateFieldWithSettings
+              type="end"
+              label="終了日"
+              value={endDate}
+              onDateChange={setEndDate}
+            />
+          </>
+        )}
         <button
           type="button"
           onClick={handleCalculate}

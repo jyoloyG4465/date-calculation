@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import type { DateValue } from "@/shared/types/date";
 import { DateField } from "@/shared/components/DateField";
 import {
@@ -17,8 +17,14 @@ import styles from "./DateAfterDays.module.css";
 export default function DateAfterDays() {
   const [baseDate, setBaseDate] = useState<DateValue>(getToday);
   const [days, setDays] = useState<string>("1");
+  const [initialized, setInitialized] = useState(false);
   const [resultDate, setResultDate] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    setBaseDate(getToday());
+    setInitialized(true);
+  }, []);
 
   const handleCalculate = () => {
     const yearError = validateYearInput(baseDate.year);
@@ -57,7 +63,11 @@ export default function DateAfterDays() {
     <div className={styles.container}>
       <h1 className={styles.title}>N日後計算</h1>
       <div className={styles.inputSection}>
-        <DateField value={baseDate} onDateChange={setBaseDate} />
+        {initialized && (
+          <>
+            <DateField value={baseDate} onDateChange={setBaseDate} />
+          </>
+        )}
         <div className={styles.inputGroup}>
           <span className={styles.inputLabel}>から</span>
           <input
