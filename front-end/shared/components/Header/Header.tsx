@@ -26,6 +26,7 @@ const defaultMenuItems: MenuItem[] = [
   { label: "ホーム", to: "/" },
   { label: "日数差計算", to: "/date-calculation" },
   { label: "N日後計算", to: "/date-after-days" },
+  { label: "お問い合わせ", to: "/contact" },
 ];
 
 interface HeaderProps {
@@ -71,7 +72,7 @@ export function Header({ menuItems = defaultMenuItems }: HeaderProps) {
       <Toolbar
         sx={{
           justifyContent: "flex-start",
-          gap: "48px",
+          gap: "36px",
           minHeight: 48,
           [`@media (min-width: ${BREAKPOINT}px)`]: {
             minHeight: 56,
