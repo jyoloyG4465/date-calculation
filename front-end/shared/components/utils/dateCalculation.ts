@@ -162,7 +162,7 @@ export function getInitialStartDate(): DateValue {
 }
 
 /**
- * 初期の終了日を取得する（翌月同日、12月なら翌年1月）
+ * 初期の終了日を取得する（翌月同日、翌月に同日がなければ翌月末日）
  */
 export function getInitialEndDate(): DateValue {
   const today = new Date();
@@ -170,8 +170,18 @@ export function getInitialEndDate(): DateValue {
   const month = today.getMonth() + 1;
   const day = today.getDate();
 
+  let nextYear = year;
+  let nextMonth = month + 1;
+
   if (month === 12) {
-    return { year: year + 1, month: 1, day };
+    nextYear = year + 1;
+    nextMonth = 1;
   }
-  return { year, month: month + 1, day };
+
+  // 翌月の末日を取得
+  const lastDayOfNextMonth = getLastDayOfMonth(nextYear, nextMonth - 1);
+  // 翌月に同日がなければ末日を使用
+  const nextDay = Math.min(day, lastDayOfNextMonth);
+
+  return { year: nextYear, month: nextMonth, day: nextDay };
 }
