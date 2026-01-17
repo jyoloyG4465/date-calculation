@@ -1,17 +1,33 @@
-# 日数計算ツール
+# 日付計算ツール
 
 ## 概要
 
-開始日と終了日を指定して、両日間の日数・週数・月数差を計算できるウェブアプリケーションです。
+日付に関する計算機能を提供するウェブアプリケーションです。日数差計算、N日後計算、問い合わせフォームの3つの機能を備えています。
 入力した日付情報はブラウザのローカルストレージに保存され、次回アクセス時にも再利用できます。
 
-![日数計算ツールの画面](./img/screenshot.png)
+![日付計算ツールの画面](./img/screenshot.png)
 
 ## 主な機能
+
+### 日数差計算
 
 - 開始日と終了日を指定して日数・週数・月数を自動計算
 - 今日の日付をワンクリックで設定可能
 - 入力した日付情報をローカルストレージに保存・呼び出し
+
+### N日後計算
+
+- 基準日からN日後（またはN日前）の日付を計算
+- 計算結果の曜日も表示
+- 今日の日付をワンクリックで設定可能
+
+### 問い合わせフォーム
+
+- お問い合わせ機能（Server Actions 使用）
+- セキュリティ対策（Bot対策、バリデーション）
+
+### 共通機能
+
 - 入力値のバリデーション（西暦 1900 年以降の半角数字のみ受け付け）
 - レスポンシブ対応（モバイル表示対応）
 
@@ -19,58 +35,55 @@
 
 ```
 date-calculation/
-├── front-end/                    # Reactアプリケーション
-│   ├── src/
-│   │   ├── components/           # UIコンポーネント
-│   │   │   ├── DateField/        # 日付入力フィールド
-│   │   │   ├── SettingsMenu/     # 設定メニュー（保存/呼出）
-│   │   │   ├── ResultSection/    # 計算結果表示
-│   │   │   ├── InfoSection/      # サイト説明
-│   │   │   └── Toast/            # 通知表示
-│   │   ├── contexts/             # React Context
-│   │   │   └── ToastContext.tsx  # トースト通知管理
-│   │   ├── hooks/                # カスタムフック
-│   │   │   └── useLocalStorage.ts
-│   │   ├── types/                # 型定義
-│   │   │   └── date.ts
-│   │   ├── utils/                # ユーティリティ関数
-│   │   │   ├── dateCalculation.ts
-│   │   │   └── dateValidation.ts
-│   │   ├── App.tsx               # メインコンポーネント
-│   │   └── main.tsx              # エントリポイント
-│   ├── dist/                     # ビルド成果物
-│   └── package.json
-├── docs/                         # ドキュメント
-│   ├── react-migration-guide.md  # React移行ガイド
-│   └── cdk-deploy-plan.md        # AWSデプロイ計画
-├── img/                          # 画像
+├── front-end/               # Next.js アプリケーション
+│   ├── app/                 # App Router
+│   │   ├── page.tsx         # ホームページ
+│   │   ├── date-calculation/# 日数差計算
+│   │   ├── date-after-days/ # N日後計算
+│   │   └── contact/         # 問い合わせフォーム
+│   ├── shared/              # 共有コンポーネント・ユーティリティ
+│   │   ├── components/      # UIコンポーネント
+│   │   ├── contexts/        # React Context
+│   │   ├── hooks/           # カスタムフック
+│   │   └── types/           # 型定義
+│   └── lib/                 # ライブラリ設定
+├── cdk/                     # AWS CDK インフラ
+├── img/                     # 画像
 └── README.md
 ```
 
 ## 技術スタック
 
-| カテゴリ       | 技術                     |
-| -------------- | ------------------------ |
-| フレームワーク | React 19                 |
-| 言語           | TypeScript               |
-| ビルドツール   | Vite                     |
-| スタイリング   | CSS Modules              |
-| テスト         | Vitest                   |
-| 状態管理       | React Context + useState |
+| カテゴリ       | 技術                       |
+| -------------- | -------------------------- |
+| フレームワーク | Next.js 16 (App Router)    |
+| UI ライブラリ  | React 19                   |
+| 言語           | TypeScript                 |
+| スタイリング   | MUI (Material-UI) + Emotion|
+| テスト         | Jest + Testing Library     |
+| メール送信     | Resend                     |
+| 状態管理       | React Context + useState   |
+| インフラ       | AWS CDK                    |
 
 ## 工夫した点
 
 ### コンポーネント設計
 
 - **単一責任の原則**: 各コンポーネントは 1 つの役割に集中
-- **再利用性**: DateField は開始日・終了日で共通利用
-- **CSS Modules**: スタイルのスコープを限定し、命名衝突を防止
+- **再利用性**: DateField は各ページで共通利用
+- **MUI の活用**: 一貫性のある UI とアクセシビリティを実現
 
 ### 日付計算ロジック
 
 - **純粋関数**: 計算ロジックを utils に分離し、テスト容易性を確保
 - **月末考慮**: 1/31 → 2/28 のような月末計算を正確に処理
 - **ヘルパー関数**: `getLastDayOfMonth`, `isEndOfMonth`, `addMonths` で可読性向上
+
+### Server Actions
+
+- **サーバーサイド処理**: 問い合わせフォームは Server Actions を使用
+- **セキュリティ対策**: Bot対策（ハニーポット）、入力バリデーション
+- **メール送信**: Resend を使用した信頼性の高いメール配信
 
 ### UX 改善
 
@@ -80,8 +93,8 @@ date-calculation/
 
 ### データ永続化
 
-- **LocalStorage**: 既存データとの互換性を維持（キー名: `startDay`, `endDay`）
-- **カスタムフック**: `useLocalStorage`でロジックを抽象化
+- **LocalStorage**: 既存データとの互換性を維持
+- **カスタムフック**: `useLocalStorage` でロジックを抽象化
 
 ## 開発環境のセットアップ
 
@@ -99,23 +112,39 @@ npm run dev
 
 ## 利用可能なスクリプト
 
-| コマンド           | 説明                         |
-| ------------------ | ---------------------------- |
-| `npm run dev`      | 開発サーバー起動             |
-| `npm run build`    | 本番ビルド                   |
-| `npm run preview`  | ビルド結果のプレビュー       |
-| `npm run test`     | テスト実行（ウォッチモード） |
-| `npm run test:run` | テスト実行（1 回のみ）       |
-| `npm run lint`     | ESLint によるコードチェック  |
+| コマンド               | 説明                         |
+| ---------------------- | ---------------------------- |
+| `npm run dev`          | 開発サーバー起動             |
+| `npm run build`        | 本番ビルド                   |
+| `npm run start`        | 本番サーバー起動             |
+| `npm run lint`         | ESLint によるコードチェック  |
+| `npm run test`         | テスト実行                   |
+| `npm run test:watch`   | テスト実行（ウォッチモード） |
+| `npm run test:coverage`| カバレッジ生成               |
+
+## 環境変数
+
+問い合わせフォーム機能を使用する場合は、以下の環境変数を設定してください。
+
+```bash
+# Resend API キー
+RESEND_API_KEY=re_xxxxxxxxxx
+
+# 問い合わせメールの送信先
+CONTACT_EMAIL_TO=your-email@example.com
+
+# 問い合わせメールの送信元
+CONTACT_EMAIL_FROM=noreply@your-domain.com
+```
 
 ## テスト
 
 ```bash
 cd front-end
-npm run test:run
+npm run test
 ```
 
-18 件のテストケースで以下をカバー:
+テストケースで以下をカバー:
 
 - 日数・週数・月数の計算
 - 月またぎ・年またぎの計算
@@ -123,12 +152,15 @@ npm run test:run
 - 月末の計算
 - バリデーション
 
-## 今後の予定
+## デプロイ
 
-- AWS CDK によるインフラ構築（S3 + CloudFront）
-- カスタムドメイン対応（Route53 + ACM）
+AWS CDK を使用してインフラを構築します。
 
-詳細は [docs/cdk-deploy-plan.md](./docs/cdk-deploy-plan.md) を参照
+```bash
+cd cdk
+npm install
+npx cdk deploy
+```
 
 ## データの保存について
 
