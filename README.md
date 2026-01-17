@@ -154,7 +154,33 @@ npm run test
 
 ## デプロイ
 
-AWS CDK を使用してインフラを構築します。
+### Vercel（推奨）
+
+このプロジェクトは Vercel でホスティングされています。
+
+1. [Vercel](https://vercel.com) にログイン
+2. GitHub リポジトリをインポート
+3. ルートディレクトリを `front-end` に設定
+4. 環境変数を設定（問い合わせフォーム機能を使用する場合）
+5. デプロイ
+
+`main` ブランチへのプッシュで自動デプロイされます。
+
+### Google Search Console
+
+所有権確認用の HTML ファイルは `front-end/public/` に配置してください。
+
+```bash
+# 例: googleXXXXXXXX.html を配置
+cp googleXXXXXXXX.html front-end/public/
+git add front-end/public/googleXXXXXXXX.html
+git commit -m "Add Google Search Console verification file"
+git push
+```
+
+### AWS CDK（オプション）
+
+AWS CDK を使用してインフラを構築することもできます。
 
 ```bash
 cd cdk
